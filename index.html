@@ -97,6 +97,9 @@
             font-family: "Courier New", Courier, monospace;
             font-size: 0.95em;
         }
+        .project p { /* Added paragraph styling */
+            margin-bottom: 15px;
+        }
         footer {
             text-align: center;
             margin-top: 40px;
@@ -111,13 +114,24 @@
         <p style="text-align: center;">A showcase of AI-driven automation, full-stack development, and rapid prototyping projects developed within a two-month timeframe.</p>
         
         <div class="project">
-            <h3 class="project-title">Summarizer 3000 (Full-Stack Research Environment)</h3>
+            <h3 class="project-title">Summarizer 3000: AI-Powered Full-Stack Research & Learning Environment</h3>
+            <p>Spearheaded the design and full-stack development of this project, transforming an initial desktop concept into a sophisticated, AI-driven web application designed to streamline the entire academic research, writing, and learning lifecycle. The platform integrates every step of the process—from initial content ingestion and drafting to final manuscript creation and exam preparation—within a single, cohesive environment.</p>
+            
+            <strong>Key Contributions & Features:</strong>
             <ul>
-                <li>Architected and developed a comprehensive, multi-tabbed desktop research environment using PyQt5 to serve as an all-in-one academic research and study environment.</li>
-                <li>Integrated Google's Gemini API for advanced document summarization, custom-prompt interactions, and AI-driven chat functionalities.</li>
-                <li>Engineered features for automated exam and PowerPoint (.pptx) generation, alongside a robust system for creating, managing, and linking notes, summaries, and study plans within a hierarchical project structure.</li>
+                <li><strong>Full-Stack Web Architecture:</strong> Developed a robust backend using Flask and SQLAlchemy, featuring a RESTful API that serves both a dynamic, single-page web application and a companion Chrome extension. The frontend is built with vanilla JavaScript, HTML5, and Bootstrap to deliver a responsive and interactive user experience.</li>
+                <li><strong>Advanced AI-Powered Writing Assistant:</strong> Engineered a multi-panel "Writing Assistant" module that actively guides the user's writing process. This includes a rich-text editor, contextual source management, conversational AI chat, and "Smart Features" for automated academic outlining and full-length paper generation based on user profiles and selected sources.</li>
+                <li><strong>Personalized "Learn Anything" Module:</strong> Designed and implemented an innovative "Learn Anything" module where users can create persistent, database-backed "Learning Libraries." Users can curate sources, define learning goals, and engage in contextual, stateful conversations with an AI tutor that references the provided materials, personalizing the learning journey.</li>
+                <li><strong>Automated Content Generation & Study Tools:</strong> Automated the creation of complex study materials, including multi-day study plans derived from LLM outputs, varied exam types (MCQ, essay), and themed PowerPoint presentations. This process involves sophisticated parsing of structured LLM responses and dynamically generating calendar events and linked materials.</li>
+                <li><strong>Comprehensive Ecosystem & User Experience:</strong> Orchestrated a seamless user workflow, from multi-format content ingestion (PDFs, DOCX, YouTube transcripts, websites) and hierarchical project management to a full-featured dynamic calendar and an accompanying Chrome browser extension for on-the-fly interaction with web content.</li>
             </ul>
-            <div class="tech-stack"><strong>Technologies:</strong> <code>Python</code>, <code>PyQt5</code>, <code>SQLAlchemy</code>, <code>Google Generative AI</code>, <code>Pandoc</code>, <code>PyPDF2</code>, <code>python-pptx</code>, <code>ebooklib</code>.</div>
+            <div class="tech-stack">
+                <strong>Backend:</strong> <code>Python</code>, <code>Flask</code>, <code>SQLAlchemy</code><br>
+                <strong>Frontend:</strong> <code>JavaScript (Vanilla)</code>, <code>HTML5</code>, <code>CSS3</code>, <code>Bootstrap 5</code><br>
+                <strong>AI & Data Processing:</strong> <code>Google Generative AI (Gemini)</code>, <code>Pandoc</code>, <code>PyPDF2</code>, <code>python-pptx</code>, <code>ebooklib</code><br>
+                <strong>Database:</strong> <code>SQLite</code><br>
+                <strong>Tools & Ecosystem:</strong> <code>Chrome Extensions (Side Panel API)</code>, <code>Git</code>
+            </div>
         </div>
 
         <div class="project">
@@ -157,6 +171,26 @@
                 <li>Uses a configurable prompt template to create unique visual representations for each row of data, handling API requests and file-saving in a non-blocking background thread.</li>
             </ul>
             <div class="tech-stack"><strong>Technologies:</strong> <code>Python</code>, <code>Tkinter</code>, <code>Google Generative AI</code>, <code>Pillow</code>.</div>
+        </div>
+        
+        <div class="project">
+            <h3 class="project-title">AI Studio Automator for PDF Summary <a href="https://github.com/Unreliable-Support/ai_studio_automator_for_pdf_summary" target="_blank" class="github-link">GitHub</a></h3>
+            <ul>
+                <li>Developed a desktop GUI application using Tkinter to streamline the process of summarizing large PDF or TXT documents chapter by chapter.</li>
+                <li>Allows users to define specific chapter sections and page ranges within files, which are then used to generate targeted prompts.</li>
+                <li>Automates the workflow by opening Google's AI Studio, pasting the file content (or attaching it on Windows), pasting the instructional prompt, and submitting it for processing, all controlled via PyAutoGUI.</li>
+            </ul>
+            <div class="tech-stack"><strong>Technologies:</strong> <code>Python</code>, <code>Tkinter (ttk)</code>, <code>PyAutoGUI</code>, <code>PyPDF2</code>, <code>pyperclip</code>, <code>pywin32</code>.</div>
+        </div>
+
+        <div class="project">
+            <h3 class="project-title">Text Combiner for AI Studio Content</h3>
+            <ul>
+                <li>Built a specialized Tkinter tool for content creators to assemble complex, structured text prompts from multiple saved templates and custom inputs.</li>
+                <li>Features a custom clipboard handler (on Windows) that automatically converts copied HTML content into clean Markdown upon pasting, streamlining content gathering from web sources.</li>
+                <li>Saves and loads the application's entire state, including all text fields and the number of active content sets, ensuring workflow continuity between sessions.</li>
+            </ul>
+            <div class="tech-stack"><strong>Technologies:</strong> <code>Python</code>, <code>Tkinter (ttk)</code>, <code>JSON</code>, <code>win32clipboard</code>, <code>html2text</code>.</div>
         </div>
 
         <div class="project">
@@ -213,16 +247,6 @@
                 <li>Uses the Pandas library to read the source Excel file and construct a new DataFrame with a separate row for each generated text chunk.</li>
             </ul>
             <div class="tech-stack"><strong>Technologies:</strong> <code>Python</code>, <code>Pandas</code>, <code>Tkinter (ttk)</code>.</div>
-        </div>
-
-        <div class="project">
-            <h3 class="project-title">AI Studio Automator & Text Combiner <a href="https://github.com/Unreliable-Support/ai_studio_automator.py" target="_blank" class="github-link">GitHub</a></h3>
-            <ul>
-                <li>Built a specialized content creation tool for assembling complex text prompts and automating submissions to Google AI Studio.</li>
-                <li>Features a custom clipboard handler on Windows that automatically converts copied HTML content into clean Markdown upon pasting.</li>
-                <li>Uses PyAutoGUI to automate browser actions, streamlining the research and generation workflow.</li>
-            </ul>
-            <div class="tech-stack"><strong>Technologies:</strong> <code>Python</code>, <code>Tkinter (ttk)</code>, <code>PyAutoGUI</code>, <code>win32clipboard</code>, <code>html2text</code>.</div>
         </div>
         
         <div class="project">
