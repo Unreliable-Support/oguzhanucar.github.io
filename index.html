@@ -51,21 +51,30 @@
             color: #0d6efd;
             margin-bottom: 10px;
         }
-        .project-title .github-link {
+        .project-title .github-link, .project-title .youtube-link {
             font-size: 0.7em;
             font-weight: normal;
-            background-color: #e9ecef;
-            color: #495057;
             padding: 3px 8px;
             border-radius: 12px;
             text-decoration: none;
-            margin-left: 10px;
+            margin-left: 5px;
             transition: background-color 0.2s;
-            display: inline-block; /* To allow vertical alignment */
+            display: inline-block;
             vertical-align: middle;
+        }
+        .project-title .github-link {
+            background-color: #e9ecef;
+            color: #495057;
         }
         .project-title .github-link:hover {
             background-color: #ced4da;
+        }
+        .project-title .youtube-link {
+            background-color: #c4302b;
+            color: white;
+        }
+        .project-title .youtube-link:hover {
+            background-color: #a32420;
         }
         .project ul {
             list-style-type: none;
@@ -114,7 +123,7 @@
         <p style="text-align: center;">A showcase of AI-driven automation, full-stack development, and rapid prototyping projects developed within a two-month timeframe.</p>
         
         <div class="project">
-            <h3 class="project-title">Summarizer 3000: AI-Powered Full-Stack Research & Learning Environment</h3>
+            <h3 class="project-title">Summarizer 3000: AI-Powered Full-Stack Research & Learning Environment <a href="https://www.youtube.com/watch?v=LR0EVrcY-_k" target="_blank" class="youtube-link">YouTube Demo</a></h3>
             <p>Spearheaded the design and full-stack development of this project, transforming an initial desktop concept into a sophisticated, AI-driven web application designed to streamline the entire academic research, writing, and learning lifecycle. The platform integrates every step of the process—from initial content ingestion and drafting to final manuscript creation and exam preparation—within a single, cohesive environment.</p>
             
             <strong>Key Contributions & Features:</strong>
@@ -135,7 +144,7 @@
         </div>
 
         <div class="project">
-            <h3 class="project-title">AI-Powered Content Workflow Automator</h3>
+            <h3 class="project-title">AI-Powered Content Workflow Automator <a href="https://www.youtube.com/watch?v=sCXsc7B2PcY" target="_blank" class="youtube-link">YouTube Demo</a></h3>
             <ul>
                 <li>Built a sophisticated desktop tool with a Tkinter GUI to automate a multi-stage content creation and verification workflow.</li>
                 <li>Implemented a feature to automatically verify statistical data by scraping web links from source files using BeautifulSoup and performing fuzzy string matching.</li>
@@ -156,7 +165,7 @@
         </div>
 
         <div class="project">
-            <h3 class="project-title">Python FFMPEG Video Automation <a href="https://github.com/Unreliable-Support/python-ffmpeg-video-automation" target="_blank" class="github-link">GitHub</a></h3>
+            <h3 class="project-title">Python FFMPEG Video Automation <a href="https://github.com/Unreliable-Support/python-ffmpeg-video-automation" target="_blank" class="github-link">GitHub</a> <a href="https://www.youtube.com/watch?v=ryzhvRr-Pi0" target="_blank" class="youtube-link">YouTube Demo</a></h3>
             <ul>
                 <li>Wrote a Python script to automate the creation of short-form videos by programmatically controlling the FFMPEG command-line tool.</li>
                 <li>The script reads quotes and authors from a CSV file, dynamically creating text overlays with advanced formatting, and combines them with background images and audio to produce unique video outputs.</li>
@@ -165,7 +174,7 @@
         </div>
 
         <div class="project">
-            <h3 class="project-title">Gemini CSV Image Generator <a href="https://github.com/Unreliable-Support/csv-ai-image-generator" target="_blank" class="github-link">GitHub</a></h3>
+            <h3 class="project-title">Gemini CSV Image Generator <a href="https://github.com/Unreliable-Support/csv-ai-image-generator" target="_blank" class="github-link">GitHub</a> <a href="https://www.youtube.com/watch?v=Q5mRqE9syts" target="_blank" class="youtube-link">YouTube Demo</a></h3>
             <ul>
                 <li>Constructed a multithreaded Tkinter desktop application that batch-generates images from a CSV file using Google's Gemini AI.</li>
                 <li>Uses a configurable prompt template to create unique visual representations for each row of data, handling API requests and file-saving in a non-blocking background thread.</li>
@@ -173,6 +182,32 @@
             <div class="tech-stack"><strong>Technologies:</strong> <code>Python</code>, <code>Tkinter</code>, <code>Google Generative AI</code>, <code>Pillow</code>.</div>
         </div>
         
+        <!-- NEW PROJECTS MOVED HERE -->
+        <div class="project">
+            <h3 class="project-title">Note Harvester: Desktop Utility <a href="https://github.com/Unreliable-Support/note-harvester" target="_blank" class="github-link">GitHub</a></h3>
+            <p>A robust desktop utility to instantly capture selected text from any application with a global hotkey. It organizes clippings into distinct notebooks, providing a seamless workflow for research and information gathering.</p>
+            <ul>
+                <li><strong>Global Hotkey Capture:</strong> Instantly saves any highlighted text from anywhere in the OS with a customizable hotkey (e.g., `<Ctrl>+<Alt>+A`).</li>
+                <li><strong>Crash-Proof Design:</strong> The capture mechanism temporarily pauses the hotkey listener during the copy operation and guarantees its restart, ensuring high stability and preventing conflicts.</li>
+                <li><strong>Rich GUI for Organization:</strong> Features a clean Tkinter interface for creating and managing multiple notebooks, filtering notes by text or source, and merging multiple entries into one.</li>
+                <li><strong>System Tray Integration:</strong> Runs unobtrusively in the background and can be minimized to the system tray for easy access without cluttering the desktop.</li>
+            </ul>
+            <div class="tech-stack"><strong>Technologies:</strong> <code>Python</code>, <code>Tkinter (ttk)</code>, <code>pynput</code>, <code>pygetwindow</code>, <code>pystray</code>, <code>pyperclip</code>, <code>JSON</code>.</div>
+        </div>
+        
+        <div class="project">
+            <h3 class="project-title">Jigsaw Web Builder: Drag & Drop Page Creator <a href="https://github.com/Unreliable-Support/Jigsaw-Web-Builder" target="_blank" class="github-link">GitHub</a></h3>
+            <p>A lightweight, zero-dependency, in-browser tool for visually creating simple web pages. The entire application is contained within a single HTML file, making it incredibly portable and easy to use with no setup required.</p>
+            <ul>
+                <li><strong>Zero Dependencies:</strong> Built entirely with vanilla JavaScript, HTML5, and CSS3. No libraries, no frameworks, no build steps.</li>
+                <li><strong>Visual Page Building:</strong> Features a drag-and-drop interface to add and reorder components like headings, images, multi-column layouts, and embedded videos.</li>
+                <li><strong>Real-Time Inspector Panel:</strong> Select any element on the canvas to instantly edit its properties (color, font size, URL, margins) with live updates.</li>
+                <li><strong>Clean Code Generation:</strong> Generates a clean, self-contained HTML file with embedded CSS that can be downloaded with a single click.</li>
+            </ul>
+            <div class="tech-stack"><strong>Technologies:</strong> <code>JavaScript (Vanilla)</code>, <code>HTML5</code>, <code>CSS3</code>.</div>
+        </div>
+        <!-- END OF MOVED PROJECTS -->
+
         <div class="project">
             <h3 class="project-title">AI Studio Automator for PDF Summary <a href="https://github.com/Unreliable-Support/ai_studio_automator_for_pdf_summary" target="_blank" class="github-link">GitHub</a></h3>
             <ul>
@@ -250,7 +285,7 @@
         </div>
         
         <div class="project">
-            <h3 class="project-title">PyQt PDF to Text Converter <a href="https://github.com/Unreliable-Support/pyqt-pdf-to-text-converter" target="_blank" class="github-link">GitHub</a></h3>
+            <h3 class="project-title">PyQt PDF to Text Converter <a href="https://github.com/Unreliable-Support/pyqt-pdf-to-text-converter" target="_blank" class="github-link">GitHub</a> <a href="https://www.youtube.com/watch?v=CdTIBUgpRcU" target="_blank" class="youtube-link">YouTube Demo</a></h3>
             <ul>
                 <li>A desktop utility built with PyQt5 for batch-converting PDF files to plain text, featuring a drag-and-drop interface for adding files.</li>
             </ul>
