@@ -4,357 +4,605 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Oğuzhan Uçar - Full Project Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --bg-color: #f8f9fa;
+            --container-bg: #ffffff;
+            --text-color: #212529;
+            --heading-color: #2E3440;
+            --accent-color: #5E81AC;
+            --accent-hover: #434C5E;
+            --border-color: #e5e9f0;
+            --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.07);
+            --card-hover-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+        }
+        *, *::before, *::after { box-sizing: border-box; }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background-color: #f8f9fa;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.7;
+            color: var(--text-color);
+            background-color: var(--bg-color);
             margin: 0;
             padding: 20px;
         }
         .container {
-            max-width: 900px;
+            max-width: 1100px;
             margin: 20px auto;
-            background-color: #fff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        }
-        h1, h2 {
-            color: #2E3440; /* Nord Polar Night */
-            border-bottom: 2px solid #5E81AC; /* Nord Frost Blue */
-            padding-bottom: 10px;
-            margin-bottom: 20px;
+            background-color: var(--container-bg);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: var(--card-shadow);
         }
         h1 {
             text-align: center;
-            font-size: 2.5em;
+            font-size: 2.8em;
+            font-weight: 700;
+            color: var(--heading-color);
+            border-bottom: 3px solid var(--accent-color);
+            padding-bottom: 15px;
+            margin-bottom: 20px;
         }
-        h2 {
-            font-size: 1.8em;
-            margin-top: 40px;
-        }
-        .project {
-            margin-bottom: 35px;
-            padding-bottom: 25px;
-            border-bottom: 1px solid #e9ecef;
-        }
-        .project:last-child {
-            border-bottom: none;
-            margin-bottom: 0;
-            padding-bottom: 0;
-        }
-        .project-title {
-            font-size: 1.4em;
-            font-weight: 600;
-            color: #0d6efd;
-            margin-bottom: 10px;
-        }
-        .project-title .github-link, .project-title .youtube-link {
-            font-size: 0.7em;
-            font-weight: normal;
-            padding: 3px 8px;
-            border-radius: 12px;
+        .intro-text { text-align: center; font-size: 1.1em; color: #495057; max-width: 700px; margin: 0 auto 30px auto; }
+        .cv-button-container { text-align: center; margin-bottom: 40px; }
+        .cv-button { display: inline-block; padding: 14px 28px; background-color: var(--accent-color); color: #ECEFF4; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 1.1em; transition: all 0.3s ease; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .cv-button:hover { background-color: var(--accent-hover); transform: translateY(-2px); box-shadow: 0 4px 10px rgba(0,0,0,0.15); }
+
+        .tabs { display: flex; flex-wrap: wrap; border-bottom: 2px solid var(--border-color); margin-bottom: 30px; }
+        .tab-button { padding: 12px 20px; cursor: pointer; border: none; background-color: transparent; font-size: 1.1em; font-weight: 600; color: #6c757d; border-bottom: 4px solid transparent; transition: all 0.2s ease-in-out; margin-bottom: -2px; }
+        .tab-button:hover { background-color: #f1f3f5; color: var(--accent-hover); }
+        .tab-button.active { color: var(--accent-color); border-bottom-color: var(--accent-color); }
+        .tab-content { display: none; animation: fadeIn 0.5s; }
+        .tab-content.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .project-grid { display: grid; grid-template-columns: 1fr; gap: 25px; }
+        .project-card { display: flex; flex-direction: column; background-color: var(--container-bg); border-radius: 10px; border: 1px solid var(--border-color); overflow: hidden; transition: all 0.3s ease; }
+        .project-card:hover { transform: translateY(-5px); box-shadow: var(--card-hover-shadow); }
+        .project-image-container { width: 100%; height: 220px; overflow: hidden; }
+        .project-image { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
+        .project-card:hover .project-image { transform: scale(1.05); }
+        .project-details { padding: 25px; display: flex; flex-direction: column; flex-grow: 1; }
+        .project-title { font-size: 1.4em; font-weight: 600; color: var(--heading-color); margin-top: 0; margin-bottom: 10px; }
+        .project-links { display: flex; gap: 10px; margin-bottom: 15px; flex-wrap: wrap; }
+        
+        /* --- GÜNCELLENMİŞ BUTON STİLLERİ --- */
+        .github-link, .youtube-link, .details-button {
+            font-size: 0.8em;
+            font-weight: 500;
+            padding: 5px 12px;
+            border-radius: 15px;
             text-decoration: none;
-            margin-left: 5px;
-            transition: background-color 0.2s;
+            transition: all 0.2s;
             display: inline-block;
-            vertical-align: middle;
+            border: 1px solid;
         }
-        .project-title .github-link {
-            background-color: #e9ecef;
-            color: #495057;
-        }
-        .project-title .github-link:hover {
-            background-color: #ced4da;
-        }
-        .project-title .youtube-link {
-            background-color: #c4302b;
-            color: white;
-        }
-        .project-title .youtube-link:hover {
-            background-color: #a32420;
-        }
-        .project ul {
-            list-style-type: none;
-            padding-left: 0;
-        }
-        .project li {
-            position: relative;
-            padding-left: 25px;
-            margin-bottom: 8px;
-        }
-        .project li::before {
-            content: '✓';
-            position: absolute;
-            left: 0;
-            color: #198754;
-            font-weight: bold;
-        }
-        .tech-stack {
-            margin-top: 15px;
-            font-size: 0.9em;
-        }
-        .tech-stack strong {
-            color: #333;
-        }
-        .tech-stack code {
-            background-color: #f1f1f1;
-            padding: 2px 5px;
-            border-radius: 4px;
-            font-family: "Courier New", Courier, monospace;
-            font-size: 0.95em;
-        }
-        .project p { /* Added paragraph styling */
-            margin-bottom: 15px;
-        }
-        footer {
-            text-align: center;
-            margin-top: 40px;
-            font-size: 0.9em;
-            color: #6c757d;
-        }
+        .github-link { background-color: #e9ecef; color: #495057; border-color: #dee2e6; }
+        .github-link:hover { background-color: #2E3440; color: white; border-color: #2E3440; }
+        .youtube-link { background-color: #c4302b; color: white; border-color: #a32420; }
+        .youtube-link:hover { background-color: #a32420; border-color: #8b1d18; }
+        .details-button { background-color: var(--accent-color); color: white; cursor: pointer; border-color: var(--accent-hover); }
+        .details-button:hover { background-color: var(--accent-hover); }
+        
+        .project-details p { margin-top: 0; margin-bottom: 15px; color: #495057; flex-grow: 1; }
+        .tech-stack { margin-top: 20px; font-size: 0.9em; }
+        .tech-stack strong { color: var(--heading-color); }
+        .tech-stack code { background-color: #e9ecef; color: #bf616a; padding: 3px 6px; border-radius: 4px; font-family: "Courier New", Courier, monospace; font-size: 0.95em; }
+        
+        .about-container { display: flex; gap: 40px; flex-wrap: wrap; }
+        .about-main { flex: 2; min-width: 300px; }
+        .about-sidebar { flex: 1; min-width: 250px; }
+        .about-main h3, .about-sidebar h3 { font-size: 1.6em; color: var(--heading-color); border-bottom: 2px solid var(--border-color); padding-bottom: 8px; margin-top: 0; }
+        .about-sidebar ul { list-style: none; padding: 0; }
+        .about-sidebar li { background-color: #f1f3f5; padding: 8px 12px; border-radius: 5px; margin-bottom: 8px; font-weight: 500; }
+        .about-sidebar h4 { margin-top: 20px; margin-bottom: 10px; color: var(--accent-color); }
+        
+        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.6); align-items: center; justify-content: center; animation: fadeIn 0.3s; }
+        .modal-content { background-color: #fff; margin: auto; padding: 30px; border-radius: 10px; max-width: 800px; width: 90%; position: relative; box-shadow: 0 5px 25px rgba(0,0,0,0.2); animation: slideIn 0.4s; }
+        .close-button { color: #aaa; position: absolute; top: 15px; right: 25px; font-size: 28px; font-weight: bold; cursor: pointer; }
+        .close-button:hover, .close-button:focus { color: black; text-decoration: none; }
+        #modalLinks { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
+        .modal-body ul { list-style-type: none; padding-left: 0; }
+        .modal-body li { position: relative; padding-left: 28px; margin-bottom: 10px; }
+        .modal-body li::before { content: '✓'; position: absolute; left: 0; color: #198754; font-weight: bold; font-size: 1.2em; }
+        @keyframes slideIn { from { transform: translateY(-50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+        footer { text-align: center; margin-top: 40px; font-size: 0.9em; color: #6c757d; }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Oğuzhan Uçar's Full Project Portfolio</h1>
-        <p>A showcase of AI-driven automation, full-stack development, and rapid prototyping projects developed within a two-month timeframe.</p>
-        
-        <div class="project">
-            <h3 class="project-title">Summarizer 3000: AI-Powered Full-Stack Research & Learning Environment <a href="https://www.youtube.com/watch?v=LR0EVrcY-_k" target="_blank" class="youtube-link">YouTube Demo</a></h3>
-            <p>Spearheaded the design and full-stack development of this project, transforming an initial desktop concept into a sophisticated, AI-driven web application designed to streamline the entire academic research, writing, and learning lifecycle. The platform integrates every step of the process—from initial content ingestion and drafting to final manuscript creation and exam preparation—within a single, cohesive environment.</p>
-            
-            <strong>Key Contributions & Features:</strong>
-            <ul>
-                <li><strong>Full-Stack Web Architecture:</strong> Developed a robust backend using Flask and SQLAlchemy, featuring a RESTful API that serves both a dynamic, single-page web application and a companion Chrome extension. The frontend is built with vanilla JavaScript, HTML5, and Bootstrap to deliver a responsive and interactive user experience.</li>
-                <li><strong>Advanced AI-Powered Writing Assistant:</strong> Engineered a multi-panel "Writing Assistant" module that actively guides the user's writing process. This includes a rich-text editor, contextual source management, conversational AI chat, and "Smart Features" for automated academic outlining and full-length paper generation based on user profiles and selected sources.</li>
-                <li><strong>Personalized "Learn Anything" Module:</strong> Designed and implemented an innovative "Learn Anything" module where users can create persistent, database-backed "Learning Libraries." Users can curate sources, define learning goals, and engage in contextual, stateful conversations with an AI tutor that references the provided materials, personalizing the learning journey.</li>
-                <li><strong>Automated Content Generation & Study Tools:</strong> Automated the creation of complex study materials, including multi-day study plans derived from LLM outputs, varied exam types (MCQ, essay), and themed PowerPoint presentations. This process involves sophisticated parsing of structured LLM responses and dynamically generating calendar events and linked materials.</li>
-                <li><strong>Comprehensive Ecosystem & User Experience:</strong> Orchestrated a seamless user workflow, from multi-format content ingestion (PDFs, DOCX, YouTube transcripts, websites) and hierarchical project management to a full-featured dynamic calendar and an accompanying Chrome browser extension for on-the-fly interaction with web content.</li>
-            </ul>
-            <div class="tech-stack">
-                <strong>Backend:</strong> <code>Python</code>, <code>Flask</code>, <code>SQLAlchemy</code><br>
-                <strong>Frontend:</strong> <code>JavaScript (Vanilla)</code>, <code>HTML5</code>, <code>CSS3</code>, <code>Bootstrap 5</code><br>
-                <strong>AI & Data Processing:</strong> <code>Google Generative AI (Gemini)</code>, <code>Pandoc</code>, <code>PyPDF2</code>, <code>python-pptx</code>, <code>ebooklib</code><br>
-                <strong>Database:</strong> <code>SQLite</code><br>
-                <strong>Tools & Ecosystem:</strong> <code>Chrome Extensions (Side Panel API)</code>, <code>Git</code>
-            </div>
+        <h1>Oğuzhan Uçar's Project Portfolio</h1>
+        <p class="intro-text">A showcase of AI-driven automation, full-stack development, and rapid prototyping projects developed within a two-month timeframe.</p>
+        <div class="cv-button-container">
+            <a href="Oguzhan_Ucar_CV.pdf" target="_blank" class="cv-button">Download My CV (PDF)</a>
         </div>
 
-        <div class="project">
-            <h3 class="project-title">AI-Powered Content Workflow Automator <a href="https://www.youtube.com/watch?v=sCXsc7B2PcY" target="_blank" class="youtube-link">YouTube Demo</a></h3>
-            <ul>
-                <li>Built a sophisticated desktop tool with a Tkinter GUI to automate a multi-stage content creation and verification workflow.</li>
-                <li>Implemented a feature to automatically verify statistical data by scraping web links from source files using BeautifulSoup and performing fuzzy string matching.</li>
-                <li>Utilized the Gemini API with user-defined prompts for various text manipulation tasks, including cleaning, rewriting, adding keywords, and revising titles based on SEO inputs.</li>
-            </ul>
-            <div class="tech-stack"><strong>Technologies:</strong> <code>Python</code>, <code>Tkinter (ttk)</code>, <code>Requests</code>, <code>BeautifulSoup</code>, <code>Pandoc</code>, <code>Google Generative AI</code>, <code>fuzzywuzzy</code>.</div>
-        </div>
-        
-        <div class="project">
-            <h3 class="project-title">Intelligent PDF Converter (OCR + Pandoc) <a href="https://github.com/Unreliable-Support/ocr-pdf-converter" target="_blank" class="github-link">GitHub</a></h3>
-            <ul>
-                <li>Engineered a desktop application with a CustomTkinter GUI that converts scanned PDFs into reformatted, text-searchable PDF documents.</li>
-                <li>Employs Tesseract OCR via PyMuPDF to accurately extract text from image-based PDF pages, using multi-processing for parallel execution and enhanced performance.</li>
-                <li>Applies regex-based heuristic algorithms to identify and format headings, chapters, and paragraphs to create a structured Markdown output.</li>
-                <li>Uses the Pandoc engine to convert the generated Markdown into a clean, professionally formatted PDF with user-configurable options.</li>
-            </ul>
-            <div class="tech-stack"><strong>Technologies:</strong> <code>Python</code>, <code>CustomTkinter</code>, <code>Tesseract (pytesseract)</code>, <code>PyMuPDF (fitz)</code>, <code>Pandoc</code>, <code>Multiprocessing</code>, <code>Regex</code>.</div>
+        <div class="tabs">
+            <button class="tab-button active" onclick="openTab(event, 'about')">About Me</button>
+            <button class="tab-button" onclick="openTab(event, 'featured')">Featured</button>
+            <button class="tab-button" onclick="openTab(event, 'ai')">AI & Automation</button>
+            <button class="tab-button" onclick="openTab(event, 'web')">Full-Stack & Web</button>
+            <button class="tab-button" onclick="openTab(event, 'desktop')">Desktop Tools</button>
+            <button class="tab-button" onclick="openTab(event, 'extensions')">Extensions & Scripts</button>
         </div>
 
-        <div class="project">
-            <h3 class="project-title">Python FFMPEG Video Automation <a href="https://github.com/Unreliable-Support/python-ffmpeg-video-automation" target="_blank" class="github-link">GitHub</a> <a href="https://www.youtube.com/watch?v=ryzhvRr-Pi0" target="_blank" class="youtube-link">YouTube Demo</a></h3>
-            <ul>
-                <li>Wrote a Python script to automate the creation of short-form videos by programmatically controlling the FFMPEG command-line tool.</li>
-                <li>The script reads quotes and authors from a CSV file, dynamically creating text overlays with advanced formatting, and combines them with background images and audio to produce unique video outputs.</li>
-            </ul>
-            <div class="tech-stack"><strong>Technologies:</strong> <code>Python</code>, <code>FFMPEG (subprocess)</code>, <code>textwrap</code>.</div>
-        </div>
-
-        <div class="project">
-            <h3 class="project-title">Gemini CSV Image Generator <a href="https://github.com/Unreliable-Support/csv-ai-image-generator" target="_blank" class="github-link">GitHub</a> <a href="https://www.youtube.com/watch?v=Q5mRqE9syts" target="_blank" class="youtube-link">YouTube Demo</a></h3>
-            <ul>
-                <li>Constructed a multithreaded Tkinter desktop application that batch-generates images from a CSV file using Google's Gemini AI.</li>
-                <li>Uses a configurable prompt template to create unique visual representations for each row of data, handling API requests and file-saving in a non-blocking background thread.</li>
-            </ul>
-            <div class="tech-stack"><strong>Technologies:</strong> <code>Python</code>, <code>Tkinter</code>, <code>Google Generative AI</code>, <code>Pillow</code>.</div>
-        </div>
-        
-        <!-- NEW PROJECTS MOVED HERE -->
-        <div class="project">
-            <h3 class="project-title">Note Harvester: Desktop Utility <a href="https://github.com/Unreliable-Support/note-harvester" target="_blank" class="github-link">GitHub</a> <a href="https://youtu.be/z5KpwDU25sY" target="_blank" class="youtube-link">YouTube Demo</a></h3>
-            <p>A robust desktop utility to instantly capture selected text from any application with a global hotkey. It organizes clippings into distinct notebooks, providing a seamless workflow for research and information gathering.</p>
-            <ul>
-                <li><strong>Global Hotkey Capture:</strong> Instantly saves any highlighted text from anywhere in the OS with a customizable hotkey (e.g., `<Ctrl>+<Alt>+A`).</li>
-                <li><strong>Crash-Proof Design:</strong> The capture mechanism temporarily pauses the hotkey listener during the copy operation and guarantees its restart, ensuring high stability and preventing conflicts.</li>
-                <li><strong>Rich GUI for Organization:</strong> Features a clean Tkinter interface for creating and managing multiple notebooks, filtering notes by text or source, and merging multiple entries into one.</li>
-                <li><strong>System Tray Integration:</strong> Runs unobtrusively in the background and can be minimized to the system tray for easy access without cluttering the desktop.</li>
-            </ul>
-            <div class="tech-stack"><strong>Technologies:</strong> <code>Python</code>, <code>Tkinter (ttk)</code>, <code>pynput</code>, <code>pygetwindow</code>, <code>pystray</code>, <code>pyperclip</code>, <code>JSON</code>.</div>
-        </div>
-
-        <div class="project">
-            <h3 class="project-title">List-Liberator: Gmail Unsubscribe Dashboard <a href="https://github.com/Unreliable-Support/List-Liberator.py" target="_blank" class="github-link">GitHub</a></h3>
-            <p>A command-line utility that automates the tedious process of unsubscribing from mailing lists. It scans a user's Gmail account via the official API, identifies all unique subscriptions, and generates a single, clean HTML dashboard with one-click unsubscribe links.</p>
-            <ul>
-                <li>Securely authenticates with Google using OAuth 2.0, ensuring user privacy with read-only access and local token storage.</li>
-                <li>Efficiently processes thousands of emails by using batch API requests to minimize API calls and avoid rate-limiting errors.</li>
-                <li>Generates a simple, portable HTML dashboard that works offline and provides a centralized place to manage all subscriptions.</li>
-                <li>Engineered with a robust command-line interface that provides clear progress updates and handles common errors gracefully.</li>
-            </ul>
-            <div class="tech-stack"><strong>Technologies:</strong> <code>Python</code>, <code>Google API Client Library</code>, <code>OAuth2</code>, <code>HTML/CSS</code>.</div>
-        </div>
-        
-        <div class="project">
-            <h3 class="project-title">Jigsaw Web Builder: Drag & Drop Page Creator <a href="https://github.com/Unreliable-Support/Jigsaw-Web-Builder" target="_blank" class="github-link">GitHub</a></h3>
-            <p>A lightweight, zero-dependency, in-browser tool for visually creating simple web pages. The entire application is contained within a single HTML file, making it incredibly portable and easy to use with no setup required.</p>
-            <ul>
-                <li><strong>Zero Dependencies:</strong> Built entirely with vanilla JavaScript, HTML5, and CSS3. No libraries, no frameworks, no build steps.</li>
-                <li><strong>Visual Page Building:</strong> Features a drag-and-drop interface to add and reorder components like headings, images, multi-column layouts, and embedded videos.</li>
-                <li><strong>Real-Time Inspector Panel:</strong> Select any element on the canvas to instantly edit its properties (color, font size, URL, margins) with live updates.</li>
-                <li><strong>Clean Code Generation:</strong> Generates a clean, self-contained HTML file with embedded CSS that can be downloaded with a single click.</li>
-            </ul>
-            <div class="tech-stack"><strong>Technologies:</strong> <code>JavaScript (Vanilla)</code>, <code>HTML5</code>, <code>CSS3</code>.</div>
-        </div>
-        <!-- END OF MOVED PROJECTS -->
-
-        <div class="project">
-            <h3 class="project-title">AI Studio Automator for PDF Summary <a href="https://github.com/Unreliable-Support/ai_studio_automator_for_pdf_summary" target="_blank" class="github-link">GitHub</a></h3>
-            <ul>
-                <li>Developed a desktop GUI application using Tkinter to streamline the process of summarizing large PDF or TXT documents chapter by chapter.</li>
-                <li>Allows users to define specific chapter sections and page ranges within files, which are then used to generate targeted prompts.</li>
-                <li>Automates the workflow by opening Google's AI Studio, pasting the file content (or attaching it on Windows), pasting the instructional prompt, and submitting it for processing, all controlled via PyAutoGUI.</li>
-            </ul>
-            <div class="tech-stack"><strong>Technologies:</strong> <code>Python</code>, <code>Tkinter (ttk)</code>, <code>PyAutoGUI</code>, <code>PyPDF2</code>, <code>pyperclip</code>, <code>pywin32</code>.</div>
-        </div>
-
-        <div class="project">
-            <h3 class="project-title">Text Combiner for AI Studio Content</h3>
-            <ul>
-                <li>Built a specialized Tkinter tool for content creators to assemble complex, structured text prompts from multiple saved templates and custom inputs.</li>
-                <li>Features a custom clipboard handler (on Windows) that automatically converts copied HTML content into clean Markdown upon pasting, streamlining content gathering from web sources.</li>
-                <li>Saves and loads the application's entire state, including all text fields and the number of active content sets, ensuring workflow continuity between sessions.</li>
-            </ul>
-            <div class="tech-stack"><strong>Technologies:</strong> <code>Python</code>, <code>Tkinter (ttk)</code>, <code>JSON</code>, <code>win32clipboard</code>, <code>html2text</code>.</div>
-        </div>
-
-        <div class="project">
-            <h3 class="project-title">PDF Quote Highlighter</h3>
-            <ul>
-                <li>Developed a Python utility with a Tkinter GUI that automates finding and highlighting specific quotes from an Excel file within a large collection of PDF documents.</li>
-                <li>Builds a word-based index for each PDF to drastically speed up the search process and programmatically adds highlight annotations.</li>
-            </ul>
-            <div class="tech-stack"><strong>Technologies:</strong> <code>Python</code>, <code>Tkinter</code>, <code>Pandas</code>, <code>Fitz (PyMuPDF)</code>, <code>concurrent.futures</code>.</div>
-        </div>
-        
-        <div class="project">
-            <h3 class="project-title">AI CV Refiner (Web App)</h3>
-            <ul>
-                <li>Created a Flask-based web application designed to help users tailor their CVs and cover letters for specific job applications using the Gemini API.</li>
-                <li>Features an admin settings page to edit and save the underlying AI prompts for both CV and cover letter generation.</li>
-            </ul>
-            <div class="tech-stack"><strong>Technologies:</strong> <code>Python</code>, <code>Flask</code>, <code>Jinja2</code>, <code>Requests</code>, <code>Google Generative AI</code>.</div>
-        </div>
-
-        <div class="project">
-            <h3 class="project-title">Advanced DOCX Formatter & Converter <a href="https://github.com/Unreliable-Support/advanced_docx_formatter" target="_blank" class="github-link">GitHub</a></h3>
-            <ul>
-                <li>Designed a GUI application for batch formatting of DOCX files, providing granular control over styles for normal text and headings.</li>
-                <li>Features a drag-and-drop file list and integrates `docx2pdf` for one-click PDF conversion.</li>
-            </ul>
-            <div class="tech-stack"><strong>Technologies:</strong> <code>Python</code>, <code>CustomTkinter</code>, <code>python-docx</code>, <code>docx2pdf</code>, <code>TkinterDnD2</code>.</div>
-        </div>
-
-        <div class="project">
-            <h3 class="project-title">"Etkinlik Tayfam" - Social Activity Finder (Web App Demo)</h3>
-            <ul>
-                <li>Developed a front-end prototype for a web application that helps users find partners for various social activities and games.</li>
-                <li>Allows users to filter activity requests by category and distance, and interact by creating, joining, and leaving requests.</li>
-                <li>Utilizes `localStorage` to simulate a user session and persist activity data without a backend.</li>
-            </ul>
-            <div class="tech-stack"><strong>Technologies:</strong> <code>HTML5</code>, <code>CSS3</code>, <code>JavaScript (ES6)</code>.</div>
-        </div>
-        
-        <div class="project">
-            <h3 class="project-title">Zindik Simulator (Flask Web Game)</h3>
-            <ul>
-                <li>Created a narrative-driven, choice-based web game using the Flask framework.</li>
-                <li>Manages player stats and game progression through a session-based Python backend.</li>
-                <li>Loads all game events, locations, and NPC interactions from external JSON files for easy content updates.</li>
-            </ul>
-            <div class="tech-stack"><strong>Technologies:</strong> <code>Python</code>, <code>Flask</code>, <code>Jinja2</code>, <code>JSON</code>.</div>
-        </div>
-        
-        <div class="project">
-            <h3 class="project-title">Excel Text Chunker</h3>
-            <ul>
-                <li>Built a utility with a GUI and a standalone script to process Excel files by splitting long text within cells into multiple smaller chunks.</li>
-                <li>Uses the Pandas library to read the source Excel file and construct a new DataFrame with a separate row for each generated text chunk.</li>
-            </ul>
-            <div class="tech-stack"><strong>Technologies:</strong> <code>Python</code>, <code>Pandas</code>, <code>Tkinter (ttk)</code>.</div>
-        </div>
-        
-        <div class="project">
-            <h3 class="project-title">PyQt PDF to Text Converter <a href="https://github.com/Unreliable-Support/pyqt-pdf-to-text-converter" target="_blank" class="github-link">GitHub</a> <a href="https://www.youtube.com/watch?v=CdTIBUgpRcU" target="_blank" class="youtube-link">YouTube Demo</a></h3>
-            <ul>
-                <li>A desktop utility built with PyQt5 for batch-converting PDF files to plain text, featuring a drag-and-drop interface for adding files.</li>
-            </ul>
-            <div class="tech-stack"><strong>Technologies:</strong> <code>Python</code>, <code>PyQt5</code>, <code>PyPDF2</code>.</div>
-        </div>
-        
-        <div class="project">
-            <h3 class="project-title">PDF Page Cropper <a href="https://github.com/Unreliable-Support/pdf_cropper_gui.py" target="_blank" class="github-link">GitHub</a></h3>
-            <ul>
-                <li>A user-friendly Tkinter application for quickly cropping PDF files by specifying custom page ranges (e.g., "1-5, 8, 10-12").</li>
-            </ul>
-            <div class="tech-stack"><strong>Technologies:</strong> <code>Python</code>, <code>Tkinter (ttk)</code>, <code>PyPDF</code>.</div>
-        </div>
-        
-        <div class="project">
-            <h3 class="project-title">Format-Preserving URL Cleaner <a href="https://github.com/Unreliable-Support/Format-Preserving-URL-Cleaner" target="_blank" class="github-link">GitHub</a></h3>
-            <ul>
-                <li>A browser extension that cleans redirected Google search URLs from selected text while preserving original text formatting by manipulating DOM text nodes.</li>
-            </ul>
-            <div class="tech-stack"><strong>Technologies:</strong> <code>JavaScript</code>, <code>Chrome Extension API</code>.</div>
-        </div>
-        
-        <div class="project">
-            <h3 class="project-title">AI Studio Temperature Setter (Chrome Extension)</h3>
-            <ul>
-                <li>A specialized Chrome extension that automatically sets the "Temperature" parameter to a precise value of 0.1 within the Google AI Studio interface, using a `MutationObserver` to handle dynamic content.</li>
-            </ul>
-            <div class="tech-stack"><strong>Technologies:</strong> <code>JavaScript</code>, <code>Chrome Extension API</code>, <code>MutationObserver</code>.</div>
-        </div>
-        
-        <div class="project">
-            <h3 class="project-title">ChatGPT Web Search Activator (Chrome Extension)</h3>
-            <ul>
-                <li>A lightweight browser extension designed to improve workflow efficiency by automatically activating the "Search the web" feature in ChatGPT upon page load.</li>
-            </ul>
-            <div class="tech-stack"><strong>Technologies:</strong> <code>JavaScript</code>, <code>Chrome Extension API</code>.</div>
-        </div>
-        
-        <div class="project">
-            <h3 class="project-title">Text Transformer (Chrome Extension) <a href="https://github.com/Unreliable-Support/Text-Transformer-Extension" target="_blank" class="github-link">GitHub</a></h3>
-            <ul>
-                <li>A context-menu-based Chrome extension that allows users to instantly transform any selected text on a webpage to UPPERCASE, sentence case, or Title Case.</li>
-            </ul>
-            <div class="tech-stack"><strong>Technologies:</strong> <code>JavaScript</code>, <code>Chrome Extension API</code>.</div>
-        </div>
-
-        <div class="project">
-            <h3 class="project-title">generate_empty_docx.py <a href="https://github.com/Unreliable-Support/generate_empty_docx.py" target="_blank" class="github-link">GitHub</a></h3>
-            <ul>
-                <li>A lightweight, reusable Python script that scans a directory for `.txt` files and automatically creates a corresponding empty `.docx` file for each one, useful for initializing document conversion or templating workflows.</li>
-            </ul>
-            <div class="tech-stack"><strong>Technologies:</strong> <code>Python</code>, <code>python-docx</code>.</div>
-        </div>
+        <div id="about" class="tab-content"></div>
+        <div id="featured" class="tab-content project-grid"></div>
+        <div id="ai" class="tab-content project-grid"></div>
+        <div id="web" class="tab-content project-grid"></div>
+        <div id="desktop" class="tab-content project-grid"></div>
+        <div id="extensions" class="tab-content project-grid"></div>
         
         <footer>
-            Contact: ogznucr@gmail.com
+            Contact: ogznucr@gmail.com • <a href="https://github.com/Unreliable-Support" target="_blank" style="color: inherit;">GitHub</a>
         </footer>
     </div>
+
+    <!-- MODAL PENCERESİ YAPISI -->
+    <div id="projectModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <div class="modal-body">
+                <h2 id="modalTitle"></h2>
+                <div id="modalLinks"></div>
+                <img id="modalImage" src="" alt="Project Image" style="width: 100%; max-height: 400px; object-fit: contain; border-radius: 8px; margin-bottom: 20px;">
+                <div id="modalDescription"></div>
+                <div id="modalTech" class="tech-stack"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- PROJE VERİLERİ ---
+        const projects = [
+            {
+                id: 'summarizer-3000',
+                title: 'Summarizer 3000: AI-Powered Full-Stack Research & Learning Environment',
+                image: 'images/summarizer-3000.png',
+                short_desc: 'A sophisticated, AI-driven web application designed to streamline the entire academic research, writing, and learning lifecycle.',
+                long_desc: `
+                    <p>Spearheaded the design and full-stack development of this project, transforming an initial desktop concept into a sophisticated, AI-driven web application designed to streamline the entire academic research, writing, and learning lifecycle. The platform integrates every step of the process—from initial content ingestion and drafting to final manuscript creation and exam preparation—within a single, cohesive environment.</p>
+                    <strong>Key Contributions & Features:</strong>
+                    <ul>
+                        <li><strong>Full-Stack Web Architecture:</strong> Developed a robust backend using Flask and SQLAlchemy, featuring a RESTful API that serves both a dynamic, single-page web application and a companion Chrome extension. The frontend is built with vanilla JavaScript, HTML5, and Bootstrap to deliver a responsive and interactive user experience.</li>
+                        <li><strong>Advanced AI-Powered Writing Assistant:</strong> Engineered a multi-panel "Writing Assistant" module that actively guides the user's writing process. This includes a rich-text editor, contextual source management, conversational AI chat, and "Smart Features" for automated academic outlining and full-length paper generation based on user profiles and selected sources.</li>
+                        <li><strong>Personalized "Learn Anything" Module:</strong> Designed and implemented an innovative "Learn Anything" module where users can create persistent, database-backed "Learning Libraries." Users can curate sources, define learning goals, and engage in contextual, stateful conversations with an AI tutor that references the provided materials, personalizing the learning journey.</li>
+                        <li><strong>Automated Content Generation & Study Tools:</strong> Automated the creation of complex study materials, including multi-day study plans derived from LLM outputs, varied exam types (MCQ, essay), and themed PowerPoint presentations. This process involves sophisticated parsing of structured LLM responses and dynamically generating calendar events and linked materials.</li>
+                        <li><strong>Comprehensive Ecosystem & User Experience:</strong> Orchestrated a seamless user workflow, from multi-format content ingestion (PDFs, DOCX, YouTube transcripts, websites) and hierarchical project management to a full-featured dynamic calendar and an accompanying Chrome browser extension for on-the-fly interaction with web content.</li>
+                    </ul>`,
+                tech: '<code>Python</code>, <code>Flask</code>, <code>SQLAlchemy</code>, <code>JavaScript</code>, <code>Bootstrap</code>, <code>Google Gemini</code>, <code>Chrome Extensions</code>',
+                youtube: 'https://www.youtube.com/watch?v=LR0EVrcY-_k',
+                categories: ['featured', 'ai', 'web']
+            },
+            {
+                id: 'summarizer-3000-desktop',
+                title: 'Summarizer 3000 (Desktop Version)',
+                image: 'images/summarizer-3000-desktop.png',
+                short_desc: 'The original desktop prototype for the Summarizer 3000 ecosystem, providing foundational logic for the full-stack web platform.',
+                long_desc: `
+                    <p>The original desktop prototype for the Summarizer 3000 ecosystem. This powerful Tkinter application provided the foundational logic for content ingestion (PDF, DOCX), AI-powered summarization, and hierarchical project management, which was later evolved into the full-stack web platform.</p>
+                    <ul>
+                        <li>Developed a multi-tabbed GUI for managing different research projects and their associated source files.</li>
+                        <li>Integrated the Gemini API for core text analysis and summarization tasks.</li>
+                        <li>Established the database schema and interaction logic that served as a blueprint for the web version's backend.</li>
+                    </ul>`,
+                tech: '<code>Python</code>, <code>Tkinter</code>, <code>Google Gemini</code>, <code>PyPDF2</code>, <code>python-docx</code>',
+                categories: ['featured', 'desktop', 'ai']
+            },
+            {
+                id: 'content-workflow-automator',
+                title: 'AI-Powered Content Workflow Automator',
+                image: 'images/content-workflow-automator.png',
+                short_desc: 'A sophisticated desktop tool to automate a multi-stage content creation and verification workflow, including web scraping for data validation.',
+                long_desc: `
+                    <ul>
+                        <li>Built a sophisticated desktop tool with a Tkinter GUI to automate a multi-stage content creation and verification workflow.</li>
+                        <li>Implemented a feature to automatically verify statistical data by scraping web links from source files using BeautifulSoup and performing fuzzy string matching.</li>
+                        <li>Utilized the Gemini API with user-defined prompts for various text manipulation tasks, including cleaning, rewriting, adding keywords, and revising titles based on SEO inputs.</li>
+                    </ul>`,
+                tech: '<code>Python</code>, <code>Tkinter</code>, <code>Requests</code>, <code>BeautifulSoup</code>, <code>Pandoc</code>, <code>Google Gemini</code>, <code>fuzzywuzzy</code>',
+                youtube: 'https://www.youtube.com/watch?v=sCXsc7B2PcY',
+                categories: ['featured', 'ai', 'desktop']
+            },
+            {
+                id: 'note-harvester',
+                title: 'Note Harvester: Desktop Utility',
+                image: 'images/note-harvester.png',
+                short_desc: 'A robust desktop utility to instantly capture selected text from any application with a global hotkey, featuring a crash-proof design.',
+                long_desc: `
+                    <p>A robust desktop utility to instantly capture selected text from any application with a global hotkey. It organizes clippings into distinct notebooks, providing a seamless workflow for research and information gathering.</p>
+                    <ul>
+                        <li><strong>Global Hotkey Capture:</strong> Instantly saves any highlighted text from anywhere in the OS with a customizable hotkey (e.g., \`<Ctrl>+<Alt>+A\`).</li>
+                        <li><strong>Crash-Proof Design:</strong> The capture mechanism temporarily pauses the hotkey listener during the copy operation and guarantees its restart, ensuring high stability and preventing conflicts.</li>
+                        <li><strong>Rich GUI for Organization:</strong> Features a clean Tkinter interface for creating and managing multiple notebooks, filtering notes by text or source, and merging multiple entries into one.</li>
+                        <li><strong>System Tray Integration:</strong> Runs unobtrusively in the background and can be minimized to the system tray for easy access without cluttering the desktop.</li>
+                    </ul>`,
+                tech: '<code>Python</code>, <code>Tkinter</code>, <code>pynput</code>, <code>pygetwindow</code>, <code>pystray</code>, <code>pyperclip</code>, <code>JSON</code>',
+                github: 'https://github.com/Unreliable-Support/note-harvester',
+                youtube: 'https://youtu.be/z5KpwDU25sY',
+                categories: ['featured', 'desktop']
+            },
+            {
+                id: 'intelligent-pdf-converter',
+                title: 'Intelligent PDF Converter (OCR + Pandoc)',
+                image: 'images/intelligent-pdf-converter.png',
+                short_desc: 'Converts scanned PDFs into reformatted, text-searchable documents using Tesseract OCR, multi-processing, and Pandoc.',
+                long_desc: `
+                    <ul>
+                        <li>Engineered a desktop application with a CustomTkinter GUI that converts scanned PDFs into reformatted, text-searchable PDF documents.</li>
+                        <li>Employs Tesseract OCR via PyMuPDF to accurately extract text from image-based PDF pages, using multi-processing for parallel execution and enhanced performance.</li>
+                        <li>Applies regex-based heuristic algorithms to identify and format headings, chapters, and paragraphs to create a structured Markdown output.</li>
+                        <li>Uses the Pandoc engine to convert the generated Markdown into a clean, professionally formatted PDF with user-configurable options.</li>
+                    </ul>`,
+                tech: '<code>Python</code>, <code>CustomTkinter</code>, <code>Tesseract</code>, <code>PyMuPDF</code>, <code>Pandoc</code>, <code>Multiprocessing</code>, <code>Regex</code>',
+                github: 'https://github.com/Unreliable-Support/ocr-pdf-converter',
+                categories: ['featured', 'ai', 'desktop']
+            },
+            {
+                id: 'list-liberator',
+                title: 'List-Liberator: Gmail Unsubscribe Dashboard',
+                image: 'images/list-liberator.png',
+                short_desc: 'A command-line utility that scans Gmail via API and generates an HTML dashboard with one-click unsubscribe links.',
+                long_desc: `
+                    <p>A command-line utility that automates the tedious process of unsubscribing from mailing lists. It scans a user's Gmail account via the official API, identifies all unique subscriptions, and generates a single, clean HTML dashboard with one-click unsubscribe links.</p>
+                    <ul>
+                        <li>Securely authenticates with Google using OAuth 2.0, ensuring user privacy with read-only access and local token storage.</li>
+                        <li>Efficiently processes thousands of emails by using batch API requests to minimize API calls and avoid rate-limiting errors.</li>
+                        <li>Generates a simple, portable HTML dashboard that works offline and provides a centralized place to manage all subscriptions.</li>
+                        <li>Engineered with a robust command-line interface that provides clear progress updates and handles common errors gracefully.</li>
+                    </ul>`,
+                tech: '<code>Python</code>, <code>Google API Client</code>, <code>OAuth2</code>, <code>HTML/CSS</code>',
+                github: 'https://github.com/Unreliable-Support/List-Liberator.py',
+                categories: ['featured', 'ai', 'extensions']
+            },
+            {
+                id: 'jigsaw-web-builder',
+                title: 'Jigsaw Web Builder: Drag & Drop Page Creator',
+                image: 'images/jigsaw-web-builder.png',
+                short_desc: 'A lightweight, zero-dependency, in-browser tool for visually creating simple web pages, contained within a single HTML file.',
+                long_desc: `
+                    <p>A lightweight, zero-dependency, in-browser tool for visually creating simple web pages. The entire application is contained within a single HTML file, making it incredibly portable and easy to use with no setup required.</p>
+                    <ul>
+                        <li><strong>Zero Dependencies:</strong> Built entirely with vanilla JavaScript, HTML5, and CSS3. No libraries, no frameworks, no build steps.</li>
+                        <li><strong>Visual Page Building:</strong> Features a drag-and-drop interface to add and reorder components like headings, images, multi-column layouts, and embedded videos.</li>
+                        <li><strong>Real-Time Inspector Panel:</strong> Select any element on the canvas to instantly edit its properties (color, font size, URL, margins) with live updates.</li>
+                        <li><strong>Clean Code Generation:</strong> Generates a clean, self-contained HTML file with embedded CSS that can be downloaded with a single click.</li>
+                    </ul>`,
+                tech: '<code>JavaScript (Vanilla)</code>, <code>HTML5</code>, <code>CSS3</code>',
+                github: 'https://github.com/Unreliable-Support/Jigsaw-Web-Builder',
+                categories: ['web']
+            },
+            {
+                id: 'ffmpeg-video-automation',
+                title: 'Python FFMPEG Video Automation',
+                image: 'images/ffmpeg-video-automation.png',
+                short_desc: 'A Python script to automate the creation of short-form videos by programmatically controlling the FFMPEG command-line tool.',
+                long_desc: `<ul><li>Wrote a Python script to automate the creation of short-form videos by programmatically controlling the FFMPEG command-line tool.</li><li>The script reads quotes and authors from a CSV file, dynamically creating text overlays with advanced formatting, and combines them with background images and audio to produce unique video outputs.</li></ul>`,
+                tech: '<code>Python</code>, <code>FFMPEG (subprocess)</code>, <code>textwrap</code>',
+                github: 'https://github.com/Unreliable-Support/python-ffmpeg-video-automation',
+                youtube: 'https://www.youtube.com/watch?v=ryzhvRr-Pi0',
+                categories: ['ai', 'extensions']
+            },
+            {
+                id: 'csv-image-generator',
+                title: 'Gemini CSV Image Generator',
+                image: 'images/csv-image-generator.png',
+                short_desc: 'A multithreaded Tkinter application that batch-generates images from a CSV file using Google\'s Gemini AI.',
+                long_desc: `<ul><li>Constructed a multithreaded Tkinter desktop application that batch-generates images from a CSV file using Google's Gemini AI.</li><li>Uses a configurable prompt template to create unique visual representations for each row of data, handling API requests and file-saving in a non-blocking background thread.</li></ul>`,
+                tech: '<code>Python</code>, <code>Tkinter</code>, <code>Google Generative AI</code>, <code>Pillow</code>',
+                github: 'https://github.com/Unreliable-Support/csv-ai-image-generator',
+                youtube: 'https://www.youtube.com/watch?v=Q5mRqE9syts',
+                categories: ['ai', 'desktop']
+            },
+            {
+                id: 'ai-studio-automator',
+                title: 'AI Studio Automator for PDF Summary',
+                image: 'images/ai-studio-automator.png',
+                short_desc: 'A desktop GUI application to streamline summarizing large documents by automating the workflow in Google\'s AI Studio using PyAutoGUI.',
+                long_desc: `<ul><li>Developed a desktop GUI application using Tkinter to streamline the process of summarizing large PDF or TXT documents chapter by chapter.</li><li>Allows users to define specific chapter sections and page ranges within files, which are then used to generate targeted prompts.</li><li>Automates the workflow by opening Google's AI Studio, pasting the file content (or attaching it on Windows), pasting the instructional prompt, and submitting it for processing, all controlled via PyAutoGUI.</li></ul>`,
+                tech: '<code>Python</code>, <code>Tkinter</code>, <code>PyAutoGUI</code>, <code>PyPDF2</code>, <code>pyperclip</code>, <code>pywin32</code>',
+                github: 'https://github.com/Unreliable-Support/ai_studio_automator_for_pdf_summary',
+                categories: ['ai', 'desktop']
+            },
+            {
+                id: 'text-combiner',
+                title: 'Text Combiner for AI Studio Content',
+                image: 'images/text-combiner.png',
+                short_desc: 'A specialized Tkinter tool for content creators to assemble complex, structured text prompts from multiple saved templates and custom inputs.',
+                long_desc: `<ul><li>Built a specialized Tkinter tool for content creators to assemble complex, structured text prompts from multiple saved templates and custom inputs.</li><li>Features a custom clipboard handler (on Windows) that automatically converts copied HTML content into clean Markdown upon pasting, streamlining content gathering from web sources.</li><li>Saves and loads the application's entire state, including all text fields and the number of active content sets, ensuring workflow continuity between sessions.</li></ul>`,
+                tech: '<code>Python</code>, <code>Tkinter</code>, <code>JSON</code>, <code>win32clipboard</code>, <code>html2text</code>',
+                categories: ['desktop']
+            },
+            {
+                id: 'pdf-quote-highlighter',
+                title: 'PDF Quote Highlighter',
+                image: 'images/pdf-quote-highlighter.png',
+                short_desc: 'A Python utility that automates finding and highlighting specific quotes from an Excel file within a large collection of PDF documents.',
+                long_desc: `<ul><li>Developed a Python utility with a Tkinter GUI that automates finding and highlighting specific quotes from an Excel file within a large collection of PDF documents.</li><li>Builds a word-based index for each PDF to drastically speed up the search process and programmatically adds highlight annotations.</li></ul>`,
+                tech: '<code>Python</code>, <code>Tkinter</code>, <code>Pandas</code>, <code>Fitz (PyMuPDF)</code>, <code>concurrent.futures</code>',
+                categories: ['desktop']
+            },
+            {
+                id: 'ai-cv-refiner',
+                title: 'AI CV Refiner (Web App)',
+                image: 'images/ai-cv-refiner.png',
+                short_desc: 'A Flask-based web application to help users tailor their CVs and cover letters for specific job applications using the Gemini API.',
+                long_desc: `<ul><li>Created a Flask-based web application designed to help users tailor their CVs and cover letters for specific job applications using the Gemini API.</li><li>Features an admin settings page to edit and save the underlying AI prompts for both CV and cover letter generation.</li></ul>`,
+                tech: '<code>Python</code>, <code>Flask</code>, <code>Jinja2</code>, <code>Requests</code>, <code>Google Generative AI</code>',
+                categories: ['web', 'ai']
+            },
+            {
+                id: 'advanced-docx-formatter',
+                title: 'Advanced DOCX Formatter & Converter',
+                image: 'images/advanced-docx-formatter.png',
+                short_desc: 'A GUI application for batch formatting of DOCX files, providing granular control over styles and one-click PDF conversion.',
+                long_desc: `<ul><li>Designed a GUI application for batch formatting of DOCX files, providing granular control over styles for normal text and headings.</li><li>Features a drag-and-drop file list and integrates \`docx2pdf\` for one-click PDF conversion.</li></ul>`,
+                tech: '<code>Python</code>, <code>CustomTkinter</code>, <code>python-docx</code>, <code>docx2pdf</code>, <code>TkinterDnD2</code>',
+                github: 'https://github.com/Unreliable-Support/advanced_docx_formatter',
+                categories: ['desktop']
+            },
+            {
+                id: 'etkinlik-tayfam',
+                title: '"Etkinlik Tayfam" - Social Activity Finder (Web App Demo)',
+                image: 'images/etkinlik-tayfam.png',
+                short_desc: 'A front-end prototype for a web application that helps users find partners for various social activities and games.',
+                long_desc: `<ul><li>Developed a front-end prototype for a web application that helps users find partners for various social activities and games.</li><li>Allows users to filter activity requests by category and distance, and interact by creating, joining, and leaving requests.</li><li>Utilizes \`localStorage\` to simulate a user session and persist activity data without a backend.</li></ul>`,
+                tech: '<code>HTML5</code>, <code>CSS3</code>, <code>JavaScript (ES6)</code>',
+                categories: ['web']
+            },
+            {
+                id: 'zindik-simulator',
+                title: 'Zindik Simulator (Flask Web Game)',
+                image: 'images/zindik-simulator.png',
+                short_desc: 'A narrative-driven, choice-based web game using the Flask framework, managing game state through a session-based Python backend.',
+                long_desc: `<ul><li>Created a narrative-driven, choice-based web game using the Flask framework.</li><li>Manages player stats and game progression through a session-based Python backend.</li><li>Loads all game events, locations, and NPC interactions from external JSON files for easy content updates.</li></ul>`,
+                tech: '<code>Python</code>, <code>Flask</code>, <code>Jinja2</code>, <code>JSON</code>',
+                categories: ['web']
+            },
+            {
+                id: 'excel-text-chunker',
+                title: 'Excel Text Chunker',
+                image: 'images/excel-text-chunker.png',
+                short_desc: 'A utility to process Excel files by splitting long text within cells into multiple smaller chunks.',
+                long_desc: `<ul><li>Built a utility with a GUI and a standalone script to process Excel files by splitting long text within cells into multiple smaller chunks.</li><li>Uses the Pandas library to read the source Excel file and construct a new DataFrame with a separate row for each generated text chunk.</li></ul>`,
+                tech: '<code>Python</code>, <code>Pandas</code>, <code>Tkinter</code>',
+                categories: ['desktop']
+            },
+            {
+                id: 'pyqt-pdf-converter',
+                title: 'PyQt PDF to Text Converter',
+                image: 'images/pyqt-pdf-converter.png',
+                short_desc: 'A desktop utility built with PyQt5 for batch-converting PDF files to plain text, featuring a drag-and-drop interface.',
+                long_desc: `<ul><li>A desktop utility built with PyQt5 for batch-converting PDF files to plain text, featuring a drag-and-drop interface for adding files.</li></ul>`,
+                tech: '<code>Python</code>, <code>PyQt5</code>, <code>PyPDF2</code>',
+                github: 'https://github.com/Unreliable-Support/pyqt-pdf-to-text-converter',
+                youtube: 'https://www.youtube.com/watch?v=CdTIBUgpRcU',
+                categories: ['desktop']
+            },
+            {
+                id: 'pdf-page-cropper',
+                title: 'PDF Page Cropper',
+                image: 'images/pdf-page-cropper.png',
+                short_desc: 'A user-friendly Tkinter application for quickly cropping PDF files by specifying custom page ranges.',
+                long_desc: `<ul><li>A user-friendly Tkinter application for quickly cropping PDF files by specifying custom page ranges (e.g., "1-5, 8, 10-12").</li></ul>`,
+                tech: '<code>Python</code>, <code>Tkinter</code>, <code>PyPDF</code>',
+                github: 'https://github.com/Unreliable-Support/pdf_cropper_gui.py',
+                categories: ['desktop']
+            },
+            {
+                id: 'url-cleaner-extension',
+                title: 'Format-Preserving URL Cleaner',
+                image: 'images/url-cleaner-extension.png',
+                short_desc: 'A browser extension that cleans redirected Google search URLs from selected text while preserving original text formatting.',
+                long_desc: `<ul><li>A browser extension that cleans redirected Google search URLs from selected text while preserving original text formatting by manipulating DOM text nodes.</li></ul>`,
+                tech: '<code>JavaScript</code>, <code>Chrome Extension API</code>',
+                github: 'https://github.com/Unreliable-Support/Format-Preserving-URL-Cleaner',
+                categories: ['extensions']
+            },
+            {
+                id: 'ai-studio-setter-extension',
+                title: 'AI Studio Temperature Setter (Chrome Extension)',
+                image: 'images/ai-studio-setter-extension.png',
+                short_desc: 'A specialized Chrome extension that automatically sets the "Temperature" parameter to a precise value within the Google AI Studio interface.',
+                long_desc: `<ul><li>A specialized Chrome extension that automatically sets the "Temperature" parameter to a precise value of 0.1 within the Google AI Studio interface, using a \`MutationObserver\` to handle dynamic content.</li></ul>`,
+                tech: '<code>JavaScript</code>, <code>Chrome Extension API</code>, <code>MutationObserver</code>',
+                categories: ['extensions']
+            },
+            {
+                id: 'chatgpt-activator-extension',
+                title: 'ChatGPT Web Search Activator (Chrome Extension)',
+                image: 'images/chatgpt-activator-extension.png',
+                short_desc: 'A lightweight browser extension to improve workflow efficiency by automatically activating the "Search the web" feature in ChatGPT.',
+                long_desc: `<ul><li>A lightweight browser extension designed to improve workflow efficiency by automatically activating the "Search the web" feature in ChatGPT upon page load.</li></ul>`,
+                tech: '<code>JavaScript</code>, <code>Chrome Extension API</code>',
+                categories: ['extensions']
+            },
+            {
+                id: 'text-transformer-extension',
+                title: 'Text Transformer (Chrome Extension)',
+                image: 'images/text-transformer-extension.png',
+                short_desc: 'A context-menu-based Chrome extension that allows users to instantly transform any selected text on a webpage.',
+                long_desc: `<ul><li>A context-menu-based Chrome extension that allows users to instantly transform any selected text on a webpage to UPPERCASE, sentence case, or Title Case.</li></ul>`,
+                tech: '<code>JavaScript</code>, <code>Chrome Extension API</code>',
+                github: 'https://github.com/Unreliable-Support/Text-Transformer-Extension',
+                categories: ['extensions']
+            },
+            {
+                id: 'generate-empty-docx',
+                title: 'generate_empty_docx.py',
+                image: 'images/generate-empty-docx.png',
+                short_desc: 'A lightweight, reusable Python script that scans a directory for .txt files and creates a corresponding empty .docx file for each one.',
+                long_desc: `<ul><li>A lightweight, reusable Python script that scans a directory for \`.txt\` files and automatically creates a corresponding empty \`.docx\` file for each one, useful for initializing document conversion or templating workflows.</li></ul>`,
+                tech: '<code>Python</code>, <code>python-docx</code>',
+                github: 'https://github.com/Unreliable-Support/generate_empty_docx.py',
+                categories: ['extensions']
+            },
+            {
+                id: 'lexigraph-extractor',
+                title: 'LexiGraph_Extractor.py - Word Document Image Extractor',
+                image: 'images/lexigraph-extractor.png',
+                short_desc: 'A Python script to extract and intelligently name images from .docx files based on preceding numbered list items.',
+                long_desc: `
+                    <p>LexiGraph_Extractor.py is a Python script designed to extract images from Microsoft Word documents (.docx files). It specifically targets images that appear directly beneath numbered list items. The text of the numbered list item is used as the base filename for the extracted image, which is then saved in PNG format.</p>
+                    <p>This script is useful for automating the process of saving images from documents where images are systematically captioned or described by preceding numbered list entries.</p>
+                    <strong>Features:</strong>
+                    <ul>
+                        <li><strong>Targeted Extraction:</strong> Focuses on images associated with numbered list items.</li>
+                        <li><strong>Automatic Naming:</strong> Uses the text of the numbered list item (e.g., "1. My Image Description") to name the output file (e.g., "My Image Description.png").</li>
+                        <li><strong>PNG Output:</strong> Saves all extracted images in the PNG format.</li>
+                        <li><strong>User Feedback:</strong> Provides console output during processing, indicating the file being processed, potential filenames, successful saves, and warnings.</li>
+                        <li><strong>Error Handling:</strong> Checks if the input .docx file exists and includes a general exception handler.</li>
+                        <li><strong>Flexible Input:</strong> Accepts the .docx file path as a command-line argument or prompts the user for input.</li>
+                    </ul>`,
+                tech: '<code>Python</code>, <code>python-docx</code>, <code>Pillow</code>',
+                github: 'https://github.com/Unreliable-Support/LexiGraph_Extractor.py',
+                categories: ['extensions']
+            }
+        ];
+
+        // --- İŞLEVSELLİK (JAVASCRIPT) ---
+        document.addEventListener("DOMContentLoaded", function() {
+            renderAboutMe();
+            renderProjects();
+            setupModal();
+            document.querySelector(".tab-button.active").click();
+        });
+
+        function openTab(evt, tabName) {
+            let i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tab-button");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            const activeTab = document.getElementById(tabName);
+            activeTab.style.display = "block";
+            if (activeTab.classList.contains('project-grid')) {
+                activeTab.style.display = "grid";
+            }
+            evt.currentTarget.className += " active";
+        }
+
+        function renderAboutMe() {
+            const aboutContent = `
+                <div class="about-container">
+                    <div class="about-main">
+                        <h3>Profile & Objective</h3>
+                        <p>I am a highly motivated and results-oriented professional specializing in AI-driven automation solutions. With a background in data analysis, I excel at rapidly architecting and deploying complex software by leveraging Large Language Models (LLMs) as a primary development partner. My passion lies in transforming technical and creative challenges into efficient, automated tools that enhance productivity.</p>
+                        <p>In the past two months alone, I have built over 20 software tools of varying complexity, demonstrating my ability to deliver practical solutions quickly. My goal is to continue applying my skills in rapid prototyping and AI integration to solve impactful problems across diverse domains.</p>
+                        
+                        <h3>Experience</h3>
+                        <h4>Junior Corporate Pricing and UW Analytics Executive</h4>
+                        <p><strong>Sompo Insurance, Istanbul, Turkey</strong> (Jan 2023 – Aug 2024)</p>
+                        <ul>
+                            <li>Contributed data-driven solutions for pricing and ratemaking by analyzing datasets to reveal patterns and trends.</li>
+                            <li>Collaborated with cross-functional teams to devise innovative pricing strategies for the sake of profitability and a more competitive market position.</li>
+                            <li>Translated complex pricing models into user-friendly visualizations for stakeholders to grasp insights effortlessly and make well-informed decisions.</li>
+                            <li>Regularly prepared and sent comprehensive reports and analysis to business stakeholders and provided actionable recommendations for optimizing pricing and revenue generation.</li>
+                        </ul>
+
+                        <h4>Assistant Sales Manager</h4>
+                        <p><strong>Sompo Insurance, Istanbul, Turkey</strong> (Sep 2022 – Dec 2022)</p>
+                        <ul>
+                            <li>Regularly attended sales training sessions and supervised by prominent and experienced sales managers of the insurance sector.</li>
+                            <li>Actively contributed innovative ideas to meet and exceed sales goals.</li>
+                            <li>Assisted in generating sales strategies and project designs by analyzing sales data and offering ideas.</li>
+                        </ul>
+                    </div>
+                    <div class="about-sidebar">
+                        <h3>Core Competencies</h3>
+                        <h4>AI-Driven Development</h4>
+                        <ul>
+                            <li>LLM-Powered Code Generation</li>
+                            <li>Advanced Prompt Engineering</li>
+                            <li>System Architecture Design</li>
+                            <li>Rapid Prototyping & Debugging</li>
+                        </ul>
+                        <h4>Technologies</h4>
+                        <ul>
+                            <li><strong>Backend:</strong> Flask, SQLAlchemy, SQLite</li>
+                            <li><strong>Desktop GUI:</strong> PyQt5, Tkinter, CustomTkinter</li>
+                            <li><strong>Automation:</strong> FFMPEG, Pandoc, Tesseract, PyAutoGUI</li>
+                            <li><strong>Data:</strong> PyPDF2, python-docx, Requests</li>
+                        </ul>
+                        <h4>Education</h4>
+                        <p><strong>M.S. in Cognitive Sciences</strong><br>Yeditepe University (2022 - Present)</p>
+                        <p><strong>B.A. in Sociology</strong><br>Bogazici University (2017 - 2022)</p>
+                    </div>
+                </div>`;
+            document.getElementById('about').innerHTML = aboutContent;
+        }
+
+        function renderProjects() {
+            projects.forEach(project => {
+                const projectCardHTML = `
+                    <div class="project-card">
+                        <div class="project-image-container">
+                            <img src="${project.image}" alt="${project.title}" class="project-image">
+                        </div>
+                        <div class="project-details">
+                            <h3 class="project-title">${project.title}</h3>
+                            <p>${project.short_desc}</p>
+                            <div class="project-links">
+                                ${project.youtube ? `<a href="${project.youtube}" target="_blank" class="youtube-link">YouTube Demo</a>` : ''}
+                                ${project.github ? `<a href="${project.github}" target="_blank" class="github-link">GitHub</a>` : ''}
+                                <button class="details-button" data-id="${project.id}">See Details</button>
+                            </div>
+                            <div class="tech-stack"><strong>Technologies:</strong> ${project.tech}</div>
+                        </div>
+                    </div>`;
+                
+                project.categories.forEach(category => {
+                    const container = document.getElementById(category);
+                    if (container) {
+                        container.innerHTML += projectCardHTML;
+                    }
+                });
+            });
+        }
+
+        function setupModal() {
+            const modal = document.getElementById("projectModal");
+            const closeBtn = document.querySelector(".close-button");
+
+            document.body.addEventListener('click', function(event) {
+                if (event.target.classList.contains('details-button')) {
+                    const projectId = event.target.dataset.id;
+                    const project = projects.find(p => p.id === projectId);
+                    if (project) {
+                        document.getElementById('modalTitle').innerText = project.title;
+                        document.getElementById('modalImage').src = project.image;
+                        document.getElementById('modalDescription').innerHTML = project.long_desc;
+                        document.getElementById('modalTech').innerHTML = `<strong>Technologies:</strong> ${project.tech}`;
+                        
+                        let linksHTML = '';
+                        if (project.youtube) linksHTML += `<a href="${project.youtube}" target="_blank" class="youtube-link">YouTube Demo</a>`;
+                        if (project.github) linksHTML += `<a href="${project.github}" target="_blank" class="github-link">GitHub</a>`;
+                        document.getElementById('modalLinks').innerHTML = linksHTML;
+
+                        modal.style.display = "flex";
+                    }
+                }
+            });
+
+            closeBtn.onclick = () => modal.style.display = "none";
+            window.onclick = (event) => {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            };
+            document.addEventListener('keydown', (event) => {
+                if (event.key === "Escape") {
+                    modal.style.display = "none";
+                }
+            });
+        }
+    </script>
 </body>
 </html>
