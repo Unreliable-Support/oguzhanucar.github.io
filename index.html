@@ -23,6 +23,19 @@
             --gradient-primary: linear-gradient(135deg, #00d4ff 0%, #7c3aed 100%);
         }
 
+        html[data-theme="light"] {
+            --primary-bg: #f9f9f9;
+            --secondary-bg: #f0f0f0;
+            --card-bg: #ffffff;
+            --accent-primary: #007BFF;
+            --accent-secondary: #5a21b6;
+            --text-primary: #18181b;
+            --text-secondary: #52525b;
+            --text-muted: #71717a;
+            --border-color: #e4e4e7;
+            --gradient-primary: linear-gradient(135deg, #007BFF 0%, #5a21b6 100%);
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -40,12 +53,15 @@
             color: var(--text-primary);
             line-height: 1.6;
             overflow-x: hidden;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
         /* Scrollbar */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: var(--primary-bg); }
         ::-webkit-scrollbar-thumb { background: var(--accent-primary); border-radius: 4px; }
+        html[data-theme="light"] ::-webkit-scrollbar-track { background: var(--secondary-bg); }
+
 
         /* Navigation */
         .navbar {
@@ -57,6 +73,9 @@
             border-bottom: 1px solid var(--border-color);
             z-index: 1000;
             transition: all 0.3s ease;
+        }
+        html[data-theme="light"] .navbar {
+            background: rgba(249, 249, 249, 0.85);
         }
 
         .nav-container {
@@ -120,6 +139,11 @@
                         radial-gradient(circle at 20% 80%, rgba(245, 158, 11, 0.08) 0%, transparent 40%);
             animation: float 20s ease-in-out infinite;
         }
+        html[data-theme="light"] .hero::before {
+             background: radial-gradient(circle at 50% 50%, rgba(0, 123, 255, 0.08) 0%, transparent 40%),
+                        radial-gradient(circle at 80% 20%, rgba(90, 33, 182, 0.08) 0%, transparent 40%),
+                        radial-gradient(circle at 20% 80%, rgba(245, 158, 11, 0.08) 0%, transparent 40%);
+        }
         @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-20px); } }
         .hero-content { position: relative; z-index: 2; max-width: 800px; }
         .hero-title {
@@ -158,7 +182,13 @@
             background: var(--gradient-primary); color: white;
             box-shadow: 0 10px 30px rgba(0, 212, 255, 0.2);
         }
+        html[data-theme="light"] .btn-primary {
+            box-shadow: 0 10px 30px rgba(0, 123, 255, 0.2);
+        }
         .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(0, 212, 255, 0.3); }
+        html[data-theme="light"] .btn-primary:hover {
+            box-shadow: 0 15px 40px rgba(0, 123, 255, 0.3);
+        }
         .btn-secondary { background: transparent; color: var(--text-primary); border: 2px solid var(--border-color); }
         .btn-secondary:hover { border-color: var(--accent-primary); color: var(--accent-primary); transform: translateY(-3px); }
         @keyframes slideUp { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
@@ -200,6 +230,10 @@
             transition: all 0.3s ease; font-weight: 500;
         }
         .filter-btn.active, .filter-btn:hover { border-color: var(--accent-primary); color: var(--accent-primary); background: rgba(0, 212, 255, 0.1); }
+        html[data-theme="light"] .filter-btn.active, 
+        html[data-theme="light"] .filter-btn:hover { 
+            background: rgba(0, 123, 255, 0.1); 
+        }
         
         .projects-grid {
             display: grid;
@@ -235,6 +269,9 @@
             border-color: var(--accent-primary);
             box-shadow: 0 0 35px rgba(0, 212, 255, 0.15), 0 10px 20px rgba(0, 0, 0, 0.2);
         }
+        html[data-theme="light"] .project-card:hover {
+            box-shadow: 0 0 35px rgba(0, 123, 255, 0.1), 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
         
         .card-overlay {
             position: absolute;
@@ -269,6 +306,7 @@
         }
         .project-link.github { background: var(--secondary-bg); color: var(--text-secondary); border-color: var(--border-color); }
         .project-link.github:hover { background: #333; color: white; border-color: #666; transform: translateY(-2px); }
+        html[data-theme="light"] .project-link.github:hover { background: #e0e0e0; color: #111; border-color: #ccc; }
         .project-link.youtube { background: rgba(255, 0, 0, 0.8); color: white; }
         .project-link.youtube:hover { background: #ff0000; transform: translateY(-2px); }
         .tech-stack { display: flex; flex-wrap: wrap; gap: 0.5rem; }
@@ -276,6 +314,10 @@
             background: rgba(0, 212, 255, 0.1); color: var(--accent-primary);
             padding: 0.25rem 0.75rem; border-radius: 12px; font-size: 0.8rem;
             font-family: 'JetBrains Mono', monospace; border: 1px solid rgba(0, 212, 255, 0.2);
+        }
+        html[data-theme="light"] .tech-tag {
+            background: rgba(0, 123, 255, 0.1); 
+            border: 1px solid rgba(0, 123, 255, 0.2);
         }
 
         /* Experience Section */
@@ -317,6 +359,9 @@
             overflow-y: auto; position: relative;
             animation: slideUp 0.6s ease-out;
         }
+        html[data-theme="light"] .modal-content {
+            background: var(--primary-bg);
+        }
         .modal-close {
             position: absolute; top: 1rem; right: 1.5rem; font-size: 2rem;
             cursor: pointer; color: var(--text-muted); transition: color 0.3s ease;
@@ -325,11 +370,81 @@
         .modal h2 { margin-bottom: 1rem; color: var(--accent-primary); font-size: 2rem; }
         .modal-links { display: flex; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap; }
         .modal img { width: 100%; max-height: 400px; object-fit: contain; border-radius: 12px; margin-bottom: 2rem; background: var(--primary-bg); }
+        html[data-theme="light"] .modal img { background: var(--secondary-bg); }
         .modal-description { color: var(--text-secondary); line-height: 1.8; }
         .modal-description ul { margin: 1rem 0; padding-left: 1.5rem; }
         .modal-description li { margin-bottom: 0.75rem; }
         .modal-description strong { color: var(--accent-primary); }
         .modal-tech { margin-top: 2rem; }
+        
+        /* Theme Switcher */
+        .theme-switcher {
+            position: relative;
+            margin-left: 2rem;
+        }
+        .theme-toggle-btn {
+            background: var(--secondary-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .theme-toggle-btn:hover {
+            border-color: var(--accent-primary);
+            color: var(--accent-primary);
+        }
+        .theme-toggle-btn > i {
+            display: none; /* JS will control visibility */
+        }
+
+        .theme-menu {
+            display: none;
+            position: absolute;
+            top: 120%;
+            right: 0;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 0.5rem;
+            z-index: 1001;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            width: 150px;
+        }
+        .theme-menu.show {
+            display: block;
+        }
+        .theme-menu-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            width: 100%;
+            padding: 0.75rem;
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            text-align: left;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border-radius: 6px;
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
+        .theme-menu-item:hover {
+            background-color: var(--secondary-bg);
+            color: var(--text-primary);
+        }
+        .theme-menu-item i {
+            width: 16px;
+            text-align: center;
+        }
 
         /* Responsive */
         @media (max-width: 992px) {
@@ -343,6 +458,7 @@
             .projects-grid { grid-template-columns: 1fr; }
             .section { padding: 4rem 1rem; }
             .timeline-item { padding-left: 2rem; }
+            .theme-switcher { margin-left: auto; }
         }
         
         /* Scroll Animations */
@@ -361,6 +477,18 @@
                 <li><a href="#experience">Experience</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
+            <div class="theme-switcher">
+                <button id="theme-toggle-btn" class="theme-toggle-btn" aria-label="Toggle theme menu">
+                    <i class="icon-sun fas fa-sun"></i>
+                    <i class="icon-moon fas fa-moon"></i>
+                    <i class="icon-system fas fa-desktop"></i>
+                </button>
+                <div id="theme-menu" class="theme-menu">
+                    <button class="theme-menu-item" data-theme="light"><i class="fas fa-sun"></i> Light</button>
+                    <button class="theme-menu-item" data-theme="dark"><i class="fas fa-moon"></i> Dark</button>
+                    <button class="theme-menu-item" data-theme="system"><i class="fas fa-desktop"></i> System</button>
+                </div>
+            </div>
         </div>
     </nav>
 
@@ -523,6 +651,83 @@
 
 <script>
     document.addEventListener("DOMContentLoaded", () => {
+        // --- THEME SWITCHER LOGIC ---
+        // On first visit, set the default theme to 'dark' if no theme is set in localStorage.
+        if (localStorage.getItem('theme') === null) {
+            localStorage.setItem('theme', 'dark');
+        }
+
+        const themeToggleBtn = document.getElementById('theme-toggle-btn');
+        const themeMenu = document.getElementById('theme-menu');
+        const themeMenuItems = document.querySelectorAll('.theme-menu-item');
+        const iconSun = document.querySelector('.icon-sun');
+        const iconMoon = document.querySelector('.icon-moon');
+        const iconSystem = document.querySelector('.icon-system');
+
+        const applyTheme = (theme) => {
+            if (theme === 'light') {
+                document.documentElement.setAttribute('data-theme', 'light');
+            } else { // dark
+                document.documentElement.removeAttribute('data-theme');
+            }
+        };
+
+        const updateToggleIcon = (themeSetting) => {
+            iconSun.style.display = 'none';
+            iconMoon.style.display = 'none';
+            iconSystem.style.display = 'none';
+
+            if (themeSetting === 'light') {
+                iconSun.style.display = 'block';
+            } else if (themeSetting === 'dark') {
+                iconMoon.style.display = 'block';
+            } else { // system
+                iconSystem.style.display = 'block';
+            }
+        };
+        
+        const applyStoredTheme = () => {
+            const storedTheme = localStorage.getItem('theme');
+            updateToggleIcon(storedTheme); // Update the button icon to show the current setting
+
+            if (storedTheme === 'system') {
+                const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+                applyTheme(systemTheme);
+            } else {
+                applyTheme(storedTheme);
+            }
+        };
+
+        themeToggleBtn.addEventListener('click', (e) => {
+            e.stopPropagation(); // Prevent document click from closing it immediately
+            themeMenu.classList.toggle('show');
+        });
+
+        document.addEventListener('click', () => {
+            if (themeMenu.classList.contains('show')) {
+                themeMenu.classList.remove('show');
+            }
+        });
+
+        themeMenuItems.forEach(item => {
+            item.addEventListener('click', (e) => {
+                const newTheme = e.currentTarget.dataset.theme;
+                localStorage.setItem('theme', newTheme);
+                applyStoredTheme();
+                themeMenu.classList.remove('show');
+            });
+        });
+
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+            // Only re-apply if the user has selected "system"
+            if (localStorage.getItem('theme') === 'system') {
+                applyStoredTheme();
+            }
+        });
+        
+        // Apply theme on initial load
+        applyStoredTheme();
+
         // --- PROJECT DATA ---
         const projects = [
             { id: 'summarizer-3000', title: 'Summarizer 3000: AI-Powered Full-Stack Research & Learning Environment', image: 'images/summarizer-3000.png', short_desc: 'A sophisticated, AI-driven web application designed to streamline the entire academic research, writing, and learning lifecycle.', long_desc: `<p>Spearheaded the design and full-stack development of this project, transforming an initial desktop concept into a sophisticated, AI-driven web application designed to streamline the entire academic research, writing, and learning lifecycle. The platform integrates every step of the process—from initial content ingestion and drafting to final manuscript creation and exam preparation—within a single, cohesive environment.</p><strong>Key Contributions & Features:</strong><ul><li><strong>Full-Stack Web Architecture:</strong> Developed a robust backend using Flask and SQLAlchemy, featuring a RESTful API that serves both a dynamic, single-page web application and a companion Chrome extension. The frontend is built with vanilla JavaScript, HTML5, and Bootstrap to deliver a responsive and interactive user experience.</li><li><strong>Advanced AI-Powered Writing Assistant:</strong> Engineered a multi-panel "Writing Assistant" module that actively guides the user's writing process. This includes a rich-text editor, contextual source management, conversational AI chat, and "Smart Features" for automated academic outlining and full-length paper generation based on user profiles and selected sources.</li><li><strong>Personalized "Learn Anything" Module:</strong> Designed and implemented an innovative "Learn Anything" module where users can create persistent, database-backed "Learning Libraries." Users can curate sources, define learning goals, and engage in contextual, stateful conversations with an AI tutor that references the provided materials, personalizing the learning journey.</li><li><strong>Automated Content Generation & Study Tools:</strong> Automated the creation of complex study materials, including multi-day study plans derived from LLM outputs, varied exam types (MCQ, essay), and themed PowerPoint presentations. This process involves sophisticated parsing of structured LLM responses and dynamically generating calendar events and linked materials.</li><li><strong>Comprehensive Ecosystem & User Experience:</strong> Orchestrated a seamless user workflow, from multi-format content ingestion (PDFs, DOCX, YouTube transcripts, websites) and hierarchical project management to a full-featured dynamic calendar and an accompanying Chrome browser extension for on-the-fly interaction with web content.</li></ul>`, tech: 'Python, Flask, SQLAlchemy, JavaScript, Bootstrap, Google Gemini, Chrome Extensions', youtube: 'https://www.youtube.com/watch?v=LR0EVrcY-_k', categories: ['featured', 'ai', 'web'] },
