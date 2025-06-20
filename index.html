@@ -96,6 +96,12 @@
             background-clip: text;
         }
 
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
         .nav-links { display: flex; list-style: none; gap: 2rem; }
         .nav-links a {
             color: var(--text-secondary);
@@ -380,7 +386,6 @@
         /* Theme Switcher */
         .theme-switcher {
             position: relative;
-            margin-left: 2rem;
         }
         .theme-toggle-btn {
             background: var(--secondary-bg);
@@ -458,12 +463,22 @@
             .projects-grid { grid-template-columns: 1fr; }
             .section { padding: 4rem 1rem; }
             .timeline-item { padding-left: 2rem; }
+            .nav-right { gap: 0; } /* Remove gap on mobile */
             .theme-switcher { margin-left: auto; }
         }
         
-        /* Scroll Animations */
-        .fade-in { opacity: 0; transform: translateY(30px); transition: all 1s ease-out; }
-        .fade-in.visible { opacity: 1; transform: translateY(0); }
+        /* Scroll Animations - Disabled on mobile for reliability */
+        @media (min-width: 769px) {
+            .fade-in {
+                opacity: 0;
+                transform: translateY(30px);
+                transition: all 1s ease-out;
+            }
+            .fade-in.visible {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
         
     </style>
 </head>
@@ -471,22 +486,24 @@
     <nav class="navbar">
         <div class="nav-container">
             <a href="#hero" class="logo">Oğuzhan Uçar</a>
-            <ul class="nav-links">
-                <li><a href="#about">About</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#experience">Experience</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-            <div class="theme-switcher">
-                <button id="theme-toggle-btn" class="theme-toggle-btn" aria-label="Toggle theme menu">
-                    <i class="icon-sun fas fa-sun"></i>
-                    <i class="icon-moon fas fa-moon"></i>
-                    <i class="icon-system fas fa-desktop"></i>
-                </button>
-                <div id="theme-menu" class="theme-menu">
-                    <button class="theme-menu-item" data-theme="light"><i class="fas fa-sun"></i> Light</button>
-                    <button class="theme-menu-item" data-theme="dark"><i class="fas fa-moon"></i> Dark</button>
-                    <button class="theme-menu-item" data-theme="system"><i class="fas fa-desktop"></i> System</button>
+            <div class="nav-right">
+                <ul class="nav-links">
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#experience">Experience</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <div class="theme-switcher">
+                    <button id="theme-toggle-btn" class="theme-toggle-btn" aria-label="Toggle theme menu">
+                        <i class="icon-sun fas fa-sun"></i>
+                        <i class="icon-moon fas fa-moon"></i>
+                        <i class="icon-system fas fa-desktop"></i>
+                    </button>
+                    <div id="theme-menu" class="theme-menu">
+                        <button class="theme-menu-item" data-theme="light"><i class="fas fa-sun"></i> Light</button>
+                        <button class="theme-menu-item" data-theme="dark"><i class="fas fa-moon"></i> Dark</button>
+                        <button class="theme-menu-item" data-theme="system"><i class="fas fa-desktop"></i> System</button>
+                    </div>
                 </div>
             </div>
         </div>
