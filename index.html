@@ -700,7 +700,6 @@
 <script>
     document.addEventListener("DOMContentLoaded", () => {
         // --- THEME SWITCHER LOGIC ---
-        // On first visit, set the default theme to 'dark' if no theme is set in localStorage.
         if (localStorage.getItem('theme') === null) {
             localStorage.setItem('theme', 'dark');
         }
@@ -713,41 +712,31 @@
         const iconSystem = document.querySelector('.icon-system');
 
         const applyTheme = (theme) => {
-            if (theme === 'light') {
-                document.documentElement.setAttribute('data-theme', 'light');
-            } else { // dark
-                document.documentElement.removeAttribute('data-theme');
-            }
+            document.documentElement.setAttribute('data-theme', theme === 'light' ? 'light' : null);
+            if (theme === 'dark') document.documentElement.removeAttribute('data-theme');
         };
 
         const updateToggleIcon = (themeSetting) => {
             iconSun.style.display = 'none';
             iconMoon.style.display = 'none';
             iconSystem.style.display = 'none';
-
-            if (themeSetting === 'light') {
-                iconSun.style.display = 'block';
-            } else if (themeSetting === 'dark') {
-                iconMoon.style.display = 'block';
-            } else { // system
-                iconSystem.style.display = 'block';
-            }
+            if (themeSetting === 'light') iconSun.style.display = 'block';
+            else if (themeSetting === 'dark') iconMoon.style.display = 'block';
+            else iconSystem.style.display = 'block';
         };
         
         const applyStoredTheme = () => {
-            const storedTheme = localStorage.getItem('theme');
-            updateToggleIcon(storedTheme); // Update the button icon to show the current setting
-
+            const storedTheme = localStorage.getItem('theme') || 'dark';
+            updateToggleIcon(storedTheme);
             if (storedTheme === 'system') {
-                const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-                applyTheme(systemTheme);
+                applyTheme(window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
             } else {
                 applyTheme(storedTheme);
             }
         };
 
         themeToggleBtn.addEventListener('click', (e) => {
-            e.stopPropagation(); // Prevent document click from closing it immediately
+            e.stopPropagation();
             themeMenu.classList.toggle('show');
         });
 
@@ -767,68 +756,94 @@
         });
 
         window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
-            // Only re-apply if the user has selected "system"
             if (localStorage.getItem('theme') === 'system') {
                 applyStoredTheme();
             }
         });
         
-        // Apply theme on initial load
         applyStoredTheme();
 
         // --- PROJECT DATA ---
         const projects = [
-            // --- NEW FLAGSHIP PROJECT ---
             { 
                 id: 'psych-cleaner', 
                 title: 'Psych Cleaner: AI-Powered Journaling & Therapy Platform', 
                 image: 'images/psych-cleaner.png', 
                 short_desc: 'An advanced, full-stack mental wellness platform combining free-form journaling with AI-driven insights, structured therapy modules, and interactive clinical programs.', 
-                long_desc: `<p>A comprehensive, full-stack mental wellness application designed from the ground up to serve as a private, AI-powered companion for psychological self-exploration and structured therapy. The platform integrates multiple evidence-based therapeutic modalities into a cohesive digital experience.</p>
-                <strong>Key Features & Architecture:</strong>
-                <ul>
-                    <li><strong>Core Journaling System:</strong> A robust free-form journaling module with rich tagging capabilities for categories, people, and recurring themes, allowing for deep, interconnected thought organization.</li>
-                    <li><strong>AI Co-pilot for Insight & Therapy:</strong> Leverages the Google Gemini API for a suite of intelligent features, including:
-                        <ul>
-                            <li><strong>Contextual Analysis:</strong> On-demand AI analysis of individual entries, themes, relationships, or the user's entire journal history to identify patterns and blind spots.</li>
-                            <li><strong>Streaming Therapy Chat:</strong> Real-time, interactive therapy sessions where the AI acts as a therapist, maintaining context and guiding the conversation.</li>
-                            <li><strong>AI Writing Assistant:</strong> Provides context-aware prompts to help users overcome writer's block and delve deeper into their thoughts.</li>
-                        </ul>
-                    </li>
-                    <li><strong>Structured Therapy Journals:</strong> Implements digital versions of established therapeutic techniques like <strong>CBT Thought Records</strong>, <strong>Gratitude Journals</strong>, <strong>Expressive Writing</strong>, and <strong>ACT De-fusion</strong> exercises, guiding users through structured, evidence-based practices.</li>
-                    <li><strong>"Self-Discovery" Module:</strong> A guided, multi-stage journey for deep self-reflection, covering the user's past (autobiographical narrative), present (strengths, values), and future (ideal self, action plans), with options for AI-driven synthesis and analysis at each stage.</li>
-                    <li><strong>Integrated Clinical Programs:</strong> Features digitized, interactive versions of renowned, evidence-based therapy programs (from Oxford University Press's "Treatments That Work" series) for conditions like <strong>Insomnia (CBT-I)</strong> and <strong>Social Anxiety (CBT)</strong>, complete with daily tasks, progress tracking, and interactive worksheets.</li>
-                    <li><strong>Text-to-Speech (TTS) Integration:</strong> Utilizes Azure Cognitive Services for high-quality, natural-sounding voice output, allowing users to listen to AI responses and therapy content.</li>
-                </ul>`, 
-                tech: 'Python, Flask, Google Gemini, Azure Cognitive Services (TTS), JavaScript, Jinja2, Chart.js, Markdown2', 
+                long_desc: `<p>A comprehensive, full-stack mental wellness application designed from the ground up to serve as a private, AI-powered companion for psychological self-exploration and structured therapy. The platform integrates multiple evidence-based therapeutic modalities into a cohesive digital experience.</p><strong>Key Features & Architecture:</strong><ul><li><strong>Core Journaling System:</strong> A robust free-form journaling module with rich tagging capabilities for categories, people, and recurring themes.</li><li><strong>AI Co-pilot for Insight & Therapy:</strong> Leverages the Google Gemini API for a suite of intelligent features, including contextual analysis, streaming therapy chat, and an AI writing assistant.</li><li><strong>Structured Therapy Journals:</strong> Implements digital versions of established therapeutic techniques like CBT Thought Records, Gratitude Journals, and Expressive Writing.</li><li><strong>"Self-Discovery" Module:</strong> A guided, multi-stage journey for deep self-reflection covering past, present, and future.</li><li><strong>Integrated Clinical Programs:</strong> Features digitized, interactive versions of renowned, evidence-based therapy programs for conditions like Insomnia (CBT-I) and Social Anxiety (CBT).</li><li><strong>Text-to-Speech (TTS) Integration:</strong> Utilizes Azure Cognitive Services for high-quality, natural-sounding voice output.</li></ul>`, 
+                tech: 'Python, Flask, Google Gemini, Azure TTS, JavaScript, Chart.js', 
 				youtube: 'https://youtu.be/iAn-Ixlmge8',                
 				categories: ['flagship', 'featured', 'ai', 'web'] 
             },
-            // --- UPDATED FLAGSHIP PROJECT ---
-            { id: 'summarizer-3000', title: 'Summarizer 3000: AI-Powered Full-Stack Research & Learning Environment', image: 'images/summarizer-3000.png', short_desc: 'A sophisticated, AI-driven web application designed to streamline the entire academic research, writing, and learning lifecycle.', long_desc: `<p>Spearheaded the design and full-stack development of this project, transforming an initial desktop concept into a sophisticated, AI-driven web application designed to streamline the entire academic research, writing, and learning lifecycle. The platform integrates every step of the process—from initial content ingestion and drafting to final manuscript creation and exam preparation—within a single, cohesive environment.</p><strong>Key Contributions & Features:</strong><ul><li><strong>Full-Stack Web Architecture:</strong> Developed a robust backend using Flask and SQLAlchemy, featuring a RESTful API that serves both a dynamic, single-page web application and a companion Chrome extension. The frontend is built with vanilla JavaScript, HTML5, and Bootstrap to deliver a responsive and interactive user experience.</li><li><strong>Advanced AI-Powered Writing Assistant:</strong> Engineered a multi-panel "Writing Assistant" module that actively guides the user's writing process. This includes a rich-text editor, contextual source management, conversational AI chat, and "Smart Features" for automated academic outlining and full-length paper generation based on user profiles and selected sources.</li><li><strong>Personalized "Learn Anything" Module:</strong> Designed and implemented an innovative "Learn Anything" module where users can create persistent, database-backed "Learning Libraries." Users can curate sources, define learning goals, and engage in contextual, stateful conversations with an AI tutor that references the provided materials, personalizing the learning journey.</li><li><strong>Automated Content Generation & Study Tools:</strong> Automated the creation of complex study materials, including multi-day study plans derived from LLM outputs, varied exam types (MCQ, essay), and themed PowerPoint presentations. This process involves sophisticated parsing of structured LLM responses and dynamically generating calendar events and linked materials.</li><li><strong>Comprehensive Ecosystem & User Experience:</strong> Orchestrated a seamless user workflow, from multi-format content ingestion (PDFs, DOCX, YouTube transcripts, websites) and hierarchical project management to a full-featured dynamic calendar and an accompanying Chrome browser extension for on-the-fly interaction with web content.</li></ul>`, tech: 'Python, Flask, SQLAlchemy, JavaScript, Bootstrap, Google Gemini, Chrome Extensions', youtube: 'https://www.youtube.com/watch?v=LR0EVrcY-_k', categories: ['flagship', 'featured', 'ai', 'web'] },
-            // --- NEW FEATURED PROJECT ---
+            { 
+                id: 'summarizer-3000', 
+                title: 'Summarizer 3000: AI Research & Learning Environment', 
+                image: 'images/summarizer-3000.png', 
+                short_desc: 'A sophisticated, AI-driven web application designed to streamline the entire academic research, writing, and learning lifecycle.', 
+                long_desc: `<p>Spearheaded the design and full-stack development of this project, transforming an initial desktop concept into a sophisticated, AI-driven web application designed to streamline the entire academic research, writing, and learning lifecycle.</p><strong>Key Contributions & Features:</strong><ul><li><strong>Full-Stack Web Architecture:</strong> Developed a robust backend using Flask and SQLAlchemy, featuring a RESTful API that serves both a dynamic, single-page web application and a companion Chrome extension.</li><li><strong>Advanced AI-Powered Writing Assistant:</strong> Engineered a multi-panel "Writing Assistant" module that actively guides the user's writing process with a rich-text editor, contextual source management, and conversational AI chat.</li><li><strong>Personalized "Learn Anything" Module:</strong> Implemented an innovative "Learn Anything" module where users can create persistent "Learning Libraries" and engage in contextual, stateful conversations with an AI tutor.</li><li><strong>Automated Content Generation & Study Tools:</strong> Automated the creation of complex study materials, including multi-day study plans, varied exam types, and themed PowerPoint presentations.</li></ul>`, 
+                tech: 'Python, Flask, SQLAlchemy, JavaScript, Bootstrap, Google Gemini, Chrome Extensions', 
+                youtube: 'https://www.youtube.com/watch?v=LR0EVrcY-_k', 
+                categories: ['flagship', 'featured', 'ai', 'web'] 
+            },
+            { 
+                id: 'context-aware-assistant', 
+                title: 'Context-Aware AI Assistant (Desktop)', 
+                image: 'images/context-aware-assistant.png', 
+                short_desc: 'A global text processing tool that integrates with any application via system-wide hotkeys, offering context-aware AI actions and a persistent knowledge base.', 
+                long_desc: `<p>A sophisticated desktop AI assistant designed to act as a universal "second brain," accessible from any application via global hotkeys. The system captures context, processes it with AI, and manages a persistent knowledge base of interactions.</p><strong>Key Features:</strong><ul><li><strong>Global Integration:</strong> Uses <code>keyboard</code> and <code>pyautogui</code> to capture selected text or the entire content of any active window, making it universally compatible.</li><li><strong>Multi-Format Knowledge Base:</strong> Supports drag-and-drop ingestion of PDF, EPUB, and TXT files into specific "notebooks" for use as long-term context.</li><li><strong>Contextual & Conversational AI:</strong> Features distinct modes for processing local text or analyzing full documents, with an integrated chat window for conversational follow-ups.</li><li><strong>Persistent & Customizable:</strong> All interactions are saved into organized notebooks, and all prompts and hotkeys are configurable through the UI.</li></ul>`, 
+                tech: 'Python, Tkinter, Global Hotkeys, PyAutoGUI, PyMuPDF, Pandoc, Gemini API', 
+                categories: ['featured', 'ai', 'desktop'] 
+            },
             { 
                 id: 'habit-tracker', 
                 title: 'Personal Gamified Dashboard (Habit Tracker)', 
                 image: 'images/habit-tracker.png', 
                 short_desc: 'A full-stack web application for tracking daily habits and goals, calculating a gamified daily score based on customizable weights.', 
-                long_desc: `<p>A full-stack web application designed to gamify personal development and productivity. This dashboard allows users to track daily habits and goals, translating their efforts into a single, motivating daily score. The system is built on a flexible, weight-based algorithm that is fully customizable by the user.</p>
-                <strong>Key Features:</strong>
-                <ul>
-                    <li><strong>Dynamic Scoring System:</strong> Developed a multi-layered weighting system. Individual habits are weighted within their parent category (e.g., 'Exercise' within 'Health'), and each category is weighted globally. This allows for nuanced prioritization of life areas.</li>
-                    <li><strong>Versatile Habit Tracking:</strong> Supports multiple input types, including simple checkboxes for binary tasks and sliders for quantifiable activities (e.g., hours studied, water consumed), providing flexibility for different types of goals.</li>
-                    <li><strong>Full-Stack Architecture:</strong> Built with a Python/Flask backend that serves a RESTful API for all data operations, and a responsive vanilla JavaScript frontend that dynamically renders the UI and communicates with the backend.</li>
-                    <li><strong>Comprehensive Settings Panel:</strong> An in-depth settings interface allows users to create, edit, and delete habits and categories. Users have granular control over all weights, enabling them to perfectly tailor the scoring system to their personal priorities.</li>
-                    <li><strong>Data-Driven Analysis:</strong> Features an analysis page with historical data visualization using Chart.js, allowing users to track their overall, habit-based, and goal-based scores over time to identify trends and maintain motivation.</li>
-                </ul>`, 
+                long_desc: `<p>A full-stack web application designed to gamify personal development. This dashboard allows users to track daily habits and goals, translating their efforts into a single, motivating daily score based on a flexible, weight-based algorithm.</p><strong>Key Features:</strong><ul><li><strong>Dynamic Scoring System:</strong> Developed a multi-layered weighting system for both individual habits and parent categories.</li><li><strong>Versatile Habit Tracking:</strong> Supports multiple input types, including checkboxes for binary tasks and sliders for quantifiable activities.</li><li><strong>Full-Stack Architecture:</strong> Built with a Python/Flask backend serving a RESTful API and a responsive vanilla JavaScript frontend.</li><li><strong>Data-Driven Analysis:</strong> Features an analysis page with historical data visualization using Chart.js to track trends.</li></ul>`, 
                 tech: 'Python, Flask, JavaScript, Chart.js, HTML, CSS', 
                 categories: ['featured', 'web'] 
             },
-            // --- EXISTING FEATURED PROJECTS ---
-            { id: 'content-workflow-automator', title: 'AI-Powered Content Workflow Automator', image: 'images/content-workflow-automator.png', short_desc: 'A sophisticated desktop tool to automate a multi-stage content creation and verification workflow, including web scraping for data validation.', long_desc: `<ul><li>Built a sophisticated desktop tool with a Tkinter GUI to automate a multi-stage content creation and verification workflow.</li><li>Implemented a feature to automatically verify statistical data by scraping web links from source files using BeautifulSoup and performing fuzzy string matching.</li><li>Utilized the Gemini API with user-defined prompts for various text manipulation tasks, including cleaning, rewriting, adding keywords, and revising titles based on SEO inputs.</li></ul>`, tech: 'Python, Tkinter, Requests, BeautifulSoup, Pandoc, Google Gemini, fuzzywuzzy', youtube: 'https://www.youtube.com/watch?v=sCXsc7B2PcY', categories: ['featured', 'ai', 'desktop'] },
-            { id: 'note-harvester', title: 'Note Harvester: Desktop Utility', image: 'images/note-harvester.png', short_desc: 'A robust desktop utility to instantly capture selected text from any application with a global hotkey, featuring a crash-proof design.', long_desc: `<p>A robust desktop utility to instantly capture selected text from any application with a global hotkey. It organizes clippings into distinct notebooks, providing a seamless workflow for research and information gathering.</p><ul><li><strong>Global Hotkey Capture:</strong> Instantly saves any highlighted text from anywhere in the OS with a customizable hotkey.</li><li><strong>Crash-Proof Design:</strong> The capture mechanism temporarily pauses the hotkey listener during the copy operation and guarantees its restart.</li><li><strong>Rich GUI for Organization:</strong> Features a clean Tkinter interface for creating and managing multiple notebooks and filtering notes.</li><li><strong>System Tray Integration:</strong> Runs unobtrusively in the background and can be minimized to the system tray.</li></ul>`, tech: 'Python, Tkinter, pynput, pystray, pyperclip, JSON', github: 'https://github.com/Unreliable-Support/note-harvester', youtube: 'https://youtu.be/z5KpwDU25sY', categories: ['featured', 'desktop'] },
-            { id: 'intelligent-pdf-converter', title: 'Intelligent PDF Converter (OCR + Pandoc)', image: 'images/intelligent-pdf-converter.png', short_desc: 'Converts scanned PDFs into reformatted, text-searchable documents using Tesseract OCR, multi-processing, and Pandoc.', long_desc: `<ul><li>Engineered a desktop application with a CustomTkinter GUI that converts scanned PDFs into reformatted, text-searchable PDF documents.</li><li>Employs Tesseract OCR via PyMuPDF to accurately extract text from image-based PDF pages, using multi-processing for parallel execution and enhanced performance.</li><li>Applies regex-based heuristic algorithms to identify and format headings, chapters, and paragraphs to create a structured Markdown output.</li><li>Uses the Pandoc engine to convert the generated Markdown into a clean, professionally formatted PDF with user-configurable options.</li></ul>`, tech: 'Python, CustomTkinter, Tesseract, PyMuPDF, Pandoc, Multiprocessing, Regex', github: 'https://github.com/Unreliable-Support/ocr-pdf-converter', categories: ['featured', 'ai', 'desktop'] },
-            { id: 'summarizer-3000-desktop', title: 'Summarizer 3000 (Desktop Version)', image: 'images/summarizer-3000-desktop.png', short_desc: 'The original desktop prototype for the Summarizer 3000 ecosystem, providing foundational logic for the full-stack web platform.', long_desc: `<p>The original desktop prototype for the Summarizer 3000 ecosystem. This powerful Tkinter application provided the foundational logic for content ingestion (PDF, DOCX), AI-powered summarization, and hierarchical project management, which was later evolved into the full-stack web platform.</p><ul><li>Developed a multi-tabbed GUI for managing different research projects and their associated source files.</li><li>Integrated the Gemini API for core text analysis and summarization tasks.</li><li>Established the database schema and interaction logic that served as a blueprint for the web version's backend.</li></ul>`, tech: 'Python, Tkinter, Google Gemini, PyPDF2, python-docx', categories: ['desktop', 'ai'] },
+            { 
+                id: 'content-workflow-automator', 
+                title: 'AI-Powered Content Workflow Automator', 
+                image: 'images/content-workflow-automator.png', 
+                short_desc: 'A desktop tool to automate a multi-stage content creation and verification workflow, including web scraping for data validation.', 
+                long_desc: `<ul><li>Built a sophisticated desktop tool with a Tkinter GUI to automate a multi-stage content creation and verification workflow.</li><li>Implemented a feature to automatically verify statistical data by scraping web links from source files using BeautifulSoup and performing fuzzy string matching.</li><li>Utilized the Gemini API with user-defined prompts for various text manipulation tasks, including cleaning, rewriting, and revising titles based on SEO inputs.</li></ul>`, 
+                tech: 'Python, Tkinter, BeautifulSoup, Pandoc, Google Gemini', 
+                youtube: 'https://www.youtube.com/watch?v=sCXsc7B2PcY', 
+                categories: ['featured', 'ai', 'desktop'] 
+            },
+            { 
+                id: 'note-harvester', 
+                title: 'Note Harvester: Desktop Utility', 
+                image: 'images/note-harvester.png', 
+                short_desc: 'A robust desktop utility to instantly capture selected text from any application with a global hotkey, featuring a crash-proof design.', 
+                long_desc: `<p>A robust desktop utility to instantly capture selected text from any application with a global hotkey. It organizes clippings into distinct notebooks, providing a seamless workflow for research and information gathering.</p><ul><li><strong>Global Hotkey Capture:</strong> Instantly saves any highlighted text from anywhere in the OS.</li><li><strong>Crash-Proof Design:</strong> The capture mechanism guarantees the hotkey listener restarts after an operation.</li><li><strong>Rich GUI & System Tray Integration:</strong> Features a clean Tkinter interface for organization and runs unobtrusively in the background.</li></ul>`, 
+                tech: 'Python, Tkinter, pynput, pystray, pyperclip, JSON', 
+                github: 'https://github.com/Unreliable-Support/note-harvester', 
+                youtube: 'https://youtu.be/z5KpwDU25sY', 
+                categories: ['featured', 'desktop'] 
+            },
+            { 
+                id: 'gemini-desktop-ocr', 
+                title: 'Gemini-Powered Desktop OCR', 
+                image: 'images/gemini-desktop-ocr.png', 
+                short_desc: 'A high-performance desktop app that converts scanned PDFs into structured documents using the Gemini Vision API and parallel processing.', 
+                long_desc: `<ul><li>Developed a robust desktop application with a Tkinter GUI to convert entire scanned PDF documents into high-quality, editable formats (PDF, MD, TXT).</li><li>Leverages the Google Gemini Vision API for superior text extraction, outperforming traditional OCR engines.</li><li>Implements a multi-threaded, queue-based processing pipeline using <strong>concurrent.futures</strong> to handle pages in parallel, maximizing throughput by utilizing multiple API keys simultaneously.</li><li>Features an intelligent retry and model-fallback mechanism to ensure maximum completion rates.</li><li>Integrates <strong>Pandoc</strong> with a custom XeLaTeX template for advanced output styling.</li></ul>`, 
+                tech: 'Python, Tkinter, Gemini API, Pandoc, Concurrent Futures', 
+                categories: ['featured', 'ai', 'desktop'] 
+            },
+            { 
+                id: 'bebis-simulator', 
+                title: 'Life Simulator Game (Bebiş Simülatör)', 
+                image: 'images/bebis-simulator.png', 
+                short_desc: 'An interactive, single-file web-based life simulation game built with vanilla JavaScript, managing complex game states, character stats, and random events.', 
+                long_desc: `<p>A charming and detailed life simulation game built entirely within a single HTML file using vanilla JavaScript, HTML, and CSS. The game challenges the player to balance work, health, and personal life through a series of interactive choices.</p><strong>Key Features:</strong><ul><li><strong>Complex State Management:</strong> Manages multiple character statistics (Energy, Mental Health, Sleep, Health, etc.) that decay over time and are affected by player actions.</li><li><strong>Dynamic Time & Event System:</strong> Features an in-game clock that influences available actions and triggers random events requiring player decisions.</li><li><strong>Activity & Work Loop:</strong> Players choose between different tasks to earn money or restore stats, managed by a non-blocking activity handler.</li><li><strong>Zero Dependencies:</strong> The entire experience is self-contained, showcasing pure JavaScript logic for game development.</li></ul>`, 
+                tech: 'JavaScript (Vanilla), HTML5, CSS3', 
+                categories: ['web'] 
+            },
+            { id: 'intelligent-pdf-converter', title: 'Intelligent PDF Converter (OCR + Pandoc)', image: 'images/intelligent-pdf-converter.png', short_desc: 'Converts scanned PDFs into reformatted, text-searchable documents using Tesseract OCR, multi-processing, and Pandoc.', long_desc: `<ul><li>Engineered a desktop application with a CustomTkinter GUI that converts scanned PDFs into reformatted, text-searchable PDF documents.</li><li>Employs Tesseract OCR via PyMuPDF to accurately extract text from image-based PDF pages, using multi-processing for parallel execution and enhanced performance.</li><li>Applies regex-based heuristic algorithms to identify and format headings, chapters, and paragraphs to create a structured Markdown output.</li><li>Uses the Pandoc engine to convert the generated Markdown into a clean, professionally formatted PDF with user-configurable options.</li></ul>`, tech: 'Python, CustomTkinter, Tesseract, PyMuPDF, Pandoc, Regex', github: 'https://github.com/Unreliable-Support/ocr-pdf-converter', categories: ['ai', 'desktop'] },
+            { id: 'summarizer-3000-desktop', title: 'Summarizer 3000 (Desktop Version)', image: 'images/summarizer-3000-desktop.png', short_desc: 'The original desktop prototype for the Summarizer 3000 ecosystem, providing foundational logic for the full-stack web platform.', long_desc: `<p>The original desktop prototype for the Summarizer 3000 ecosystem. This powerful Tkinter application provided the foundational logic for content ingestion (PDF, DOCX), AI-powered summarization, and hierarchical project management, which was later evolved into the full-stack web platform.</p><ul><li>Developed a multi-tabbed GUI for managing different research projects and their associated source files.</li><li>Integrated the Gemini API for core text analysis and summarization tasks.</li><li>Established the database schema and interaction logic that served as a blueprint for the web version's backend.</li></ul>`, tech: 'Python, Tkinter, Google Gemini, PyPDF2, python-docx', categories: ['featured', 'desktop', 'ai'] },
             { id: 'list-liberator', title: 'List-Liberator: Gmail Unsubscribe Dashboard', image: 'images/list-liberator.png', short_desc: 'A command-line utility that scans Gmail via API and generates an HTML dashboard with one-click unsubscribe links.', long_desc: `<p>A command-line utility that automates the tedious process of unsubscribing from mailing lists. It scans a user's Gmail account via the official API, identifies all unique subscriptions, and generates a single, clean HTML dashboard with one-click unsubscribe links.</p><ul><li>Securely authenticates with Google using OAuth 2.0, ensuring user privacy with read-only access and local token storage.</li><li>Efficiently processes thousands of emails by using batch API requests to minimize API calls and avoid rate-limiting errors.</li><li>Generates a simple, portable HTML dashboard that works offline and provides a centralized place to manage all subscriptions.</li></ul>`, tech: 'Python, Google API Client, OAuth2, HTML/CSS', github: 'https://github.com/Unreliable-Support/List-Liberator.py', categories: ['ai', 'extensions'] },
             { id: 'jigsaw-web-builder', title: 'Jigsaw Web Builder: Drag & Drop Page Creator', image: 'images/jigsaw-web-builder.png', short_desc: 'A lightweight, zero-dependency, in-browser tool for visually creating simple web pages, contained within a single HTML file.', long_desc: `<p>A lightweight, zero-dependency, in-browser tool for visually creating simple web pages. The entire application is contained within a single HTML file, making it incredibly portable and easy to use with no setup required.</p><ul><li><strong>Zero Dependencies:</strong> Built entirely with vanilla JavaScript, HTML5, and CSS3. No libraries, no frameworks, no build steps.</li><li><strong>Visual Page Building:</strong> Features a drag-and-drop interface to add and reorder components like headings, images, multi-column layouts, and embedded videos.</li><li><strong>Real-Time Inspector Panel:</strong> Select any element on the canvas to instantly edit its properties (color, font size, URL, margins) with live updates.</li><li><strong>Clean Code Generation:</strong> Generates a clean, self-contained HTML file with embedded CSS that can be downloaded with a single click.</li></ul>`, tech: 'JavaScript (Vanilla), HTML5, CSS3', github: 'https://github.com/Unreliable-Support/Jigsaw-Web-Builder', categories: ['web'] },
             { id: 'ffmpeg-video-automation', title: 'Python FFMPEG Video Automation', image: 'images/ffmpeg-video-automation.png', short_desc: 'A Python script to automate the creation of short-form videos by programmatically controlling the FFMPEG command-line tool.', long_desc: `<ul><li>Wrote a Python script to automate the creation of short-form videos by programmatically controlling the FFMPEG command-line tool.</li><li>The script reads quotes and authors from a CSV file, dynamically creating text overlays with advanced formatting, and combines them with background images and audio to produce unique video outputs.</li></ul>`, tech: 'Python, FFMPEG (subprocess), textwrap', github: 'https://github.com/Unreliable-Support/python-ffmpeg-video-automation', youtube: 'https://www.youtube.com/watch?v=ryzhvRr-Pi0', categories: ['ai', 'extensions'] },
@@ -853,71 +868,80 @@
 
         const flagshipGrid = document.getElementById("flagship-projects-grid");
         const featuredGrid = document.getElementById("featured-projects-grid");
-        const projectsGrid = document.getElementById("projectsGrid"); // This is the "All Projects" grid
+        const projectsGrid = document.getElementById("projectsGrid");
         
         const filterButtons = document.querySelectorAll(".filter-btn");
         const modal = document.getElementById("projectModal");
         const modalClose = document.querySelector(".modal-close");
 
+        // --- DEFINE PROJECT GROUPS AND ORDER ---
         const flagshipIds = ['psych-cleaner', 'summarizer-3000'];
-        const featuredIds = ['habit-tracker', 'content-workflow-automator', 'note-harvester', 'intelligent-pdf-converter'];
+        const featuredIds = [
+            'context-aware-assistant', 
+            'habit-tracker', 
+            'content-workflow-automator', 
+            'note-harvester', 
+            'summarizer-3000-desktop'
+        ];
 
         // --- RENDER PROJECTS ---
         const renderProjects = () => {
-            // Clear all grids
             flagshipGrid.innerHTML = "";
             featuredGrid.innerHTML = "";
             projectsGrid.innerHTML = "";
             
-            projects.forEach(project => {
-                // --- Create the master card HTML template ---
-                const createCardHTML = (proj) => {
-                    const techTags = proj.tech.split(',').map(tag => `<div class="tech-tag">${tag.trim()}</div>`).join('');
-                    let links = '';
-                    if (proj.github) {
-                        links += `<a href="${proj.github}" target="_blank" class="project-link github" data-no-modal><i class="fab fa-github"></i> GitHub</a>`;
-                    }
-                    if (proj.youtube) {
-                        links += `<a href="${proj.youtube}" target="_blank" class="project-link youtube" data-no-modal><i class="fab fa-youtube"></i> YouTube</a>`;
-                    }
-                    return `
-                        <div class="project-image-container">
-                            <img src="${proj.image}" alt="${proj.title}" class="project-image" loading="lazy">
-                            <div class="card-overlay">
-                                <i class="fas fa-search-plus" style="margin-right: 10px;"></i> Click to See Details
-                            </div>
+            const createCardHTML = (proj) => {
+                const techTags = proj.tech.split(',').map(tag => `<div class="tech-tag">${tag.trim()}</div>`).join('');
+                let links = '';
+                if (proj.github) {
+                    links += `<a href="${proj.github}" target="_blank" class="project-link github" data-no-modal><i class="fab fa-github"></i> GitHub</a>`;
+                }
+                if (proj.youtube) {
+                    links += `<a href="${proj.youtube}" target="_blank" class="project-link youtube" data-no-modal><i class="fab fa-youtube"></i> YouTube</a>`;
+                }
+                return `
+                    <div class="project-image-container">
+                        <img src="${proj.image}" alt="${proj.title}" class="project-image" loading="lazy">
+                        <div class="card-overlay">
+                            <i class="fas fa-search-plus" style="margin-right: 10px;"></i> Click to See Details
                         </div>
-                        <div class="project-content">
-                            <h3 class="project-title">${proj.title}</h3>
-                            <p class="project-description">${proj.short_desc}</p>
-                            <div class="project-links">${links}</div>
-                            <div class="tech-stack">${techTags}</div>
-                        </div>
-                    `;
-                };
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">${proj.title}</h3>
+                        <p class="project-description">${proj.short_desc}</p>
+                        <div class="project-links">${links}</div>
+                        <div class="tech-stack">${techTags}</div>
+                    </div>
+                `;
+            };
 
-                // Create a card element
+            const createCardElement = (project) => {
                 const card = document.createElement("div");
                 card.className = "project-card";
                 card.dataset.categories = project.categories.join(" ");
                 card.dataset.id = project.id;
                 card.innerHTML = createCardHTML(project);
+                return card;
+            };
 
-                // --- Distribute cards to the correct grids ---
+            // 1. Populate "All Projects" grid with every project
+            projects.forEach(project => {
+                projectsGrid.appendChild(createCardElement(project));
+            });
 
-                // 1. Add ALL projects to the main filterable grid ("All Projects")
-                projectsGrid.appendChild(card);
+            // 2. Populate "Flagship" grid using its specific ID list
+            flagshipIds.forEach(id => {
+                const project = projects.find(p => p.id === id);
+                if (project) {
+                    flagshipGrid.appendChild(createCardElement(project));
+                }
+            });
 
-                // 2. Add a CLONE to the special "Flagship" section if it's a flagship project
-                if (flagshipIds.includes(project.id)) {
-                    flagshipGrid.appendChild(card.cloneNode(true));
-                } 
-                
-                // 3. Add a CLONE to the special "Featured" section if it's a featured project
-                // Note: We don't use 'else if' because a flagship project is also featured, 
-                // but we only want the non-flagship ones in the dedicated "Featured" section.
-                if (featuredIds.includes(project.id)) {
-                    featuredGrid.appendChild(card.cloneNode(true));
+            // 3. Populate "Featured" grid using its specific, separate ID list
+            featuredIds.forEach(id => {
+                const project = projects.find(p => p.id === id);
+                if (project) {
+                    featuredGrid.appendChild(createCardElement(project));
                 }
             });
         };
@@ -933,10 +957,14 @@
 
                 projectCards.forEach(card => {
                     const categories = card.dataset.categories;
-                    const matches = (filter === "all" || categories.includes(filter));
+                    const isFeatured = featuredIds.includes(card.dataset.id) || flagshipIds.includes(card.dataset.id);
+                    let matches = (filter === "all" || categories.includes(filter));
+                    if (filter === "featured") {
+                        matches = isFeatured;
+                    }
                     
                     if (card.classList.contains('hidden') && matches) {
-                        card.style.display = ''; // Reset display before unhiding
+                        card.style.display = '';
                     }
                     
                     card.classList.toggle("hidden", !matches);
@@ -946,7 +974,7 @@
                             if (card.classList.contains('hidden')) {
                                 card.style.display = 'none';
                             }
-                        }, 400); // Match transition duration
+                        }, 400);
                     } else {
                          card.style.display = '';
                     }
@@ -981,7 +1009,6 @@
             document.body.style.overflow = "auto";
         };
         
-        // Add event listener to the entire projects section for simplicity
         document.getElementById("projects").addEventListener("click", (e) => {
             if (e.target.closest('[data-no-modal]')) {
                 return;
@@ -1011,7 +1038,7 @@
 
         document.querySelectorAll(".fade-in").forEach(el => observer.observe(el));
         
-        // --- NAVBAR ACTIVE LINK ON SCROLL (ROBUST METHOD) ---
+        // --- NAVBAR ACTIVE LINK ON SCROLL ---
         const sections = document.querySelectorAll("section[id]");
         const navLinks = document.querySelectorAll(".nav-links a");
         const navBarHeight = 80; 
