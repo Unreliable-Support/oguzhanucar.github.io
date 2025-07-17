@@ -55,8 +55,12 @@
             overflow-x: hidden;
             transition: background-color 0.3s ease, color 0.3s ease;
         }
-
-        /* Scrollbar */
+		
+		.case-study-content strong {
+			color: var(--accent-primary); /* Bu renk, diğer turkuaz renklerinizle aynıdır */
+		}
+        
+		/* Scrollbar */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: var(--primary-bg); }
         ::-webkit-scrollbar-thumb { background: var(--accent-primary); border-radius: 4px; }
@@ -94,6 +98,7 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            text-decoration: none;
         }
 
         .nav-right {
@@ -134,7 +139,7 @@
             text-align: center;
             position: relative;
             overflow: hidden;
-            padding: 80px 1rem 0; /* Added top padding to prevent overlap with fixed navbar */
+            padding: 80px 1rem 0;
         }
         .hero::before {
             content: '';
@@ -209,6 +214,99 @@
         }
         .section-subtitle { font-size: 1.2rem; color: var(--text-secondary); max-width: 700px; margin: 0 auto; }
         
+        /* Case Study (Flagship Project) Sayfa Stilleri */
+        .case-study-section {
+            padding: 6rem 2rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .case-study-section:last-of-type {
+            border-bottom: none;
+        }
+        .case-study-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .case-study-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        .case-study-title {
+            font-size: clamp(2.8rem, 6vw, 4rem);
+            font-weight: 800;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.1;
+        }
+        .case-study-subtitle {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            margin-top: 0.5rem;
+        }
+        .case-study-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+        .case-study-content h3 {
+            font-size: 1.8rem;
+            color: var(--accent-primary);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .case-study-content p, .case-study-content ul {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+        }
+        .case-study-content ul {
+            list-style-position: inside;
+            padding-left: 0.5rem;
+        }
+        .case-study-content li {
+            margin-bottom: 0.75rem;
+        }
+        .case-study-sidebar .tech-stack {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+        }
+        .case-study-sidebar h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .case-study-sidebar .tech-stack-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+        .video-section {
+            margin-top: 5rem;
+        }
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        @media (max-width: 992px) {
+            .case-study-grid { grid-template-columns: 1fr; }
+        }
+
         /* About Section */
         .about-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 4rem; align-items: start; }
         .about-content h3 { font-size: 1.8rem; margin-bottom: 1.5rem; color: var(--accent-primary); }
@@ -239,6 +337,41 @@
             padding-bottom: 1rem;
             border-bottom: 1px solid var(--border-color);
             color: var(--text-primary);
+        }
+
+        /* Proje Sekmeleri */
+        .projects-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .tab-btn {
+            padding: 1rem 2rem;
+            background: transparent;
+            border: none;
+            border-bottom: 3px solid transparent;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        .tab-btn.active, .tab-btn:hover {
+            color: var(--accent-primary);
+            border-bottom-color: var(--accent-primary);
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.6s ease;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         .projects-filter { display: flex; justify-content: center; gap: 1rem; margin-bottom: 3rem; flex-wrap: wrap; }
@@ -279,7 +412,6 @@
             opacity: 0;
             transition-delay: 0s;
             pointer-events: none;
-            /* For smooth grid reflow, we use a timeout in JS to set display:none */
         }
 
         .project-card:hover {
@@ -303,7 +435,7 @@
             font-weight: 600;
             opacity: 0;
             transition: opacity 0.4s ease;
-            pointer-events: none; /* Let clicks pass through to the card */
+            pointer-events: none;
         }
         
         .project-card:hover .card-overlay {
@@ -325,8 +457,8 @@
         .project-link.github { background: var(--secondary-bg); color: var(--text-secondary); border-color: var(--border-color); }
         .project-link.github:hover { background: #333; color: white; border-color: #666; transform: translateY(-2px); }
         html[data-theme="light"] .project-link.github:hover { background: #e0e0e0; color: #111; border-color: #ccc; }
-        .project-link.youtube { background: rgba(255, 0, 0, 0.8); color: white; }
-        .project-link.youtube:hover { background: #ff0000; transform: translateY(-2px); }
+        .project-link.youtube { background: #FF0000; color: white; }
+        .project-link.youtube:hover { background: #cc0000; transform: translateY(-2px); }
         .tech-stack { display: flex; flex-wrap: wrap; gap: 0.5rem; }
         .tech-tag {
             background: rgba(0, 212, 255, 0.1); color: var(--accent-primary);
@@ -573,7 +705,7 @@
                     <h4>Technologies</h4>
                     <ul class="skill-list">
                         <li>Python</li><li>Flask</li><li>SQLAlchemy</li><li>JavaScript</li>
-                        <li>PyQt5</li><li>Tkinter</li><li>FFMPEG</li><li>Pandoc</li>
+                        <li>PyQt6</li><li>Tkinter</li><li>FFMPEG</li><li>Pandoc</li>
                         <li>Tesseract</li><li>PyAutoGUI</li><li>Google Gemini</li>
                     </ul>
                 </div>
@@ -587,35 +719,171 @@
             <p class="section-subtitle">A showcase of AI-driven automation and full-stack development projects</p>
         </div>
 
-        <!-- Flagship Projects Section -->
-        <div class="project-section">
-            <h3 class="project-section-title">Flagship Projects</h3>
-            <div class="projects-grid" id="flagship-projects-grid">
-                <!-- Flagship projects will be dynamically inserted here -->
+        <!-- Proje Sekmeleri -->
+        <div class="projects-tabs">
+            <button class="tab-btn active" data-tab="flagship-content">Flagship Projects</button>
+            <button class="tab-btn" data-tab="all-projects-content">All Projects</button>
+        </div>
+
+        <!-- Sekme İçerikleri -->
+        <div id="flagship-content" class="tab-content active">
+            <!-- Flagship Project 1: Psych Cleaner -->
+            <div class="case-study-section" style="padding-top: 0; background: transparent;">
+                <div class="case-study-container">
+                    <div class="case-study-header">
+                        <h2 class="case-study-title">Psych Cleaner</h2>
+                        <p class="case-study-subtitle">AI-Powered Journaling & Therapy Platform</p>
+                    </div>
+                    <div class="case-study-grid">
+                        <div class="case-study-content">
+                            <h3>Project Overview</h3>
+                            <p>Psych Cleaner is a comprehensive, full-stack mental wellness application designed from the ground up to serve as a private, AI-powered companion for psychological self-exploration and structured therapy. The platform integrates multiple evidence-based therapeutic modalities into a cohesive digital experience, providing users with tools for both unstructured reflection and guided, clinical-style programs.</p>
+                            <h3>Key Features & Architecture</h3>
+                            <ul>
+                                <li><strong>Core Journaling System:</strong> A robust free-form journaling module with rich tagging capabilities for categories, people, and recurring themes, allowing for deep contextual organization.</li>
+                                <li><strong>AI Co-pilot for Insight & Therapy:</strong> Leverages the Google Gemini API for a suite of intelligent features, including contextual analysis of entries, streaming therapy chat sessions, and an AI writing assistant to help users articulate their thoughts.</li>
+                                <li><strong>Structured Therapy Journals:</strong> Implements digital versions of established therapeutic techniques like CBT Thought Records, Gratitude Journals, and Expressive Writing, guiding users through proven exercises.</li>
+                                <li><strong>"Self-Discovery" Module:</strong> A unique, guided, multi-stage journey for deep self-reflection covering the user's past, present, and future to build a comprehensive personal narrative.</li>
+                                <li><strong>Integrated Clinical Programs:</strong> Features digitized, interactive versions of renowned, evidence-based therapy programs for conditions like Insomnia (CBT-I) and Social Anxiety (CBT), complete with progress tracking and automated feedback.</li>
+                                <li><strong>Advanced I/O:</strong> Supports text-to-speech (TTS) using Azure Cognitive Services for accessibility, speech-to-text for dictation, and OCR for digitizing handwritten notes.</li>
+                            </ul>
+                        </div>
+                        <div class="case-study-sidebar">
+                            <div class="tech-stack">
+                                <h3>Core Technologies</h3>
+                                <div class="tech-stack-grid">
+                                    <div class="tech-tag">Python</div>
+                                    <div class="tech-tag">Flask</div>
+                                    <div class="tech-tag">Google Gemini API</div>
+                                    <div class="tech-tag">Azure TTS</div>
+                                    <div class="tech-tag">JavaScript</div>
+                                    <div class="tech-tag">Chart.js</div>
+                                    <div class="tech-tag">SpeechRecognition</div>
+                                    <div class="tech-tag">Pydub</div>
+                                </div>
+                            </div>
+                            <div class="project-links" style="margin-top: 2rem;">
+                                <a href="https://youtu.be/iAn-Ixlmge8" target="_blank" class="project-link youtube"><i class="fab fa-youtube"></i> View on YouTube</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="video-section">
+                        <h3>Demo Video</h3>
+                        <div class="video-container">
+                            <iframe src="https://www.youtube.com/embed/iAn-Ixlmge8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Flagship Project 2: Summarizer 3000 -->
+            <div class="case-study-section">
+                <div class="case-study-container">
+                    <div class="case-study-header">
+                        <h2 class="case-study-title">Summarizer 3000</h2>
+                        <p class="case-study-subtitle">AI Research & Learning Environment</p>
+                    </div>
+                    <div class="case-study-grid">
+                        <div class="case-study-content">
+                            <h3>Project Overview</h3>
+                            <p>This project transformed an initial desktop concept into a sophisticated, AI-driven web application designed to streamline the entire academic research, writing, and learning lifecycle. It serves as a centralized hub for managing sources, generating insights, and creating new academic content with the help of a powerful AI assistant.</p>
+                            <h3>Key Features & Architecture</h3>
+                            <ul>
+                                <li><strong>Full-Stack Web Architecture:</strong> Developed a robust backend using Flask and SQLAlchemy, featuring a RESTful API that serves both a dynamic, single-page web application and a companion Chrome extension for seamless source gathering.</li>
+                                <li><strong>Advanced AI-Powered Writing Assistant:</strong> Engineered a multi-panel "Writing Assistant" module that actively guides the user's writing process with a rich-text editor, contextual source management, and conversational AI chat.</li>
+                                <li><strong>Personalized "Learn Anything" Module:</strong> Implemented an innovative "Learn Anything" module where users can create persistent "Learning Libraries" and engage in contextual, stateful conversations with an AI tutor about their chosen sources.</li>
+                                <li><strong>Automated Content Generation & Study Tools:</strong> Automated the creation of complex study materials, including multi-day study plans, varied exam types (multiple choice, essay), and themed PowerPoint presentations directly from source materials.</li>
+                            </ul>
+                        </div>
+                        <div class="case-study-sidebar">
+                            <div class="tech-stack">
+                                <h3>Core Technologies</h3>
+                                <div class="tech-stack-grid">
+                                    <div class="tech-tag">Python</div>
+                                    <div class="tech-tag">Flask</div>
+                                    <div class="tech-tag">SQLAlchemy</div>
+                                    <div class="tech-tag">JavaScript</div>
+                                    <div class="tech-tag">Bootstrap</div>
+                                    <div class="tech-tag">Google Gemini API</div>
+                                    <div class="tech-tag">Chrome Extensions</div>
+                                    <div class="tech-tag">Pandoc</div>
+                                </div>
+                            </div>
+                             <div class="project-links" style="margin-top: 2rem;">
+                                <a href="https://www.youtube.com/watch?v=LR0EVrcY-_k" target="_blank" class="project-link youtube"><i class="fab fa-youtube"></i> View on YouTube</a>
+                            </div>
+                        </div>
+                    </div>
+                     <div class="video-section">
+                        <h3>Demo Video</h3>
+                        <div class="video-container">
+                            <iframe src="https://www.youtube.com/embed/LR0EVrcY-_k" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Flagship Project 3: Flawless PDF Annotator -->
+            <div class="case-study-section" style="padding-top: 6rem; background: var(--primary-bg);">
+                <div class="case-study-container">
+                    <div class="case-study-header">
+                        <h2 class="case-study-title">Flawless PDF Annotator</h2>
+                        <p class="case-study-subtitle">AI-Enhanced Research Tool</p>
+                    </div>
+                    <div class="case-study-grid">
+                        <div class="case-study-content">
+                            <h3>Project Overview</h3>
+                            <p>A sophisticated, feature-rich PDF reader and research environment developed from scratch using Python and PyQt6. This desktop application is designed for academic and professional use, integrating powerful annotation capabilities with a context-aware AI assistant to create a seamless workflow for deep document analysis.</p>
+                            <h3>Key Features & Architecture</h3>
+                            <ul>
+                                <li><strong>High-Performance PDF Rendering:</strong> Utilizes the PyMuPDF (Fitz) library for fast and accurate page rendering, with performance optimizations like lazy loading and render caching to handle large documents smoothly.</li>
+                                <li><strong>Three-Pane Interface:</strong> A highly organized layout featuring a sidebar for navigation (file history, annotations, AI notes), a central PDF viewer with custom controls, and a dedicated AI assistant panel.</li>
+                                <li><strong>Advanced Annotation Suite:</strong> Supports precise, character-based text selection, multi-color highlighting, and persistent text notes. All annotations are saved directly and non-destructively to the PDF file.</li>
+                                <li><strong>Integrated AI Assistant (Gemini):</strong> A powerful AI panel provides contextual chat about the document content, along with customizable "Smart Actions" to summarize, analyze, or query selected text, pages, or the entire document.</li>
+                                <li><strong>Persistent AI Notes:</strong> AI-generated insights can be saved as structured notes within the PDF's metadata, creating a permanent, searchable knowledge base tied to the source document.</li>
+                                <li><strong>Modern User Experience:</strong> Features include a floating toolbar for quick access to controls, smooth middle-mouse-button auto-scrolling, and a robust settings panel for API and prompt customization.</li>
+                            </ul>
+                        </div>
+                        <div class="case-study-sidebar">
+                            <div class="tech-stack">
+                                <h3>Core Technologies</h3>
+                                <div class="tech-stack-grid">
+                                    <div class="tech-tag">Python</div>
+                                    <div class="tech-tag">PyQt6</div>
+                                    <div class="tech-tag">PyMuPDF (Fitz)</div>
+                                    <div class="tech-tag">Google Gemini API</div>
+                                    <div class="tech-tag">QThread</div>
+                                    <div class="tech-tag">JSON</div>
+                                    <div class="tech-tag">Pandoc</div>
+                                </div>
+                            </div>
+                             <div class="project-links" style="margin-top: 2rem;">
+                                <a href="#" class="btn btn-secondary disabled"><i class="fab fa-youtube"></i> Demo Coming Soon</a>
+                            </div>
+                        </div>
+                    </div>
+                     <div class="video-section">
+                        <h3>Demo Video</h3>
+                        <div class="video-container" style="background: var(--card-bg); display:flex; align-items:center; justify-content:center;">
+                            <p class="text-muted">Demo Video Coming Soon</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <!-- Featured Projects Section -->
-        <div class="project-section">
-            <h3 class="project-section-title">Featured Projects</h3>
-            <div class="projects-grid" id="featured-projects-grid">
-                <!-- Featured projects will be dynamically inserted here -->
-            </div>
-        </div>
-
-        <!-- All Projects Section -->
-        <div class="project-section">
-            <h3 class="project-section-title">All Projects</h3>
-            <div class="projects-filter">
-                <button class="filter-btn active" data-filter="all">All</button>
-                <button class="filter-btn" data-filter="featured">Featured</button>
-                <button class="filter-btn" data-filter="ai">AI & Automation</button>
-                <button class="filter-btn" data-filter="web">Full-Stack & Web</button>
-                <button class="filter-btn" data-filter="desktop">Desktop Tools</button>
-                <button class="filter-btn" data-filter="extensions">Extensions & Scripts</button>
-            </div>
-            <div class="projects-grid" id="projectsGrid">
-                <!-- All projects will be dynamically inserted and filtered here -->
+        <div id="all-projects-content" class="tab-content">
+                <div class="projects-filter">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="featured">Featured</button>
+                    <button class="filter-btn" data-filter="ai">AI & Automation</button>
+                    <button class="filter-btn" data-filter="web">Full-Stack & Web</button>
+                    <button class="filter-btn" data-filter="desktop">Desktop Tools</button>
+                    <button class="filter-btn" data-filter="extensions">Extensions & Scripts</button>
+                </div>
+                <div class="projects-grid" id="projectsGrid">
+                    <!-- All projects will be dynamically inserted and filtered here -->
+                </div>
             </div>
         </div>
     </section>
@@ -772,7 +1040,8 @@
                 short_desc: 'An advanced, full-stack mental wellness platform combining free-form journaling with AI-driven insights, structured therapy modules, and interactive clinical programs.', 
                 long_desc: `<p>A comprehensive, full-stack mental wellness application designed from the ground up to serve as a private, AI-powered companion for psychological self-exploration and structured therapy. The platform integrates multiple evidence-based therapeutic modalities into a cohesive digital experience.</p><strong>Key Features & Architecture:</strong><ul><li><strong>Core Journaling System:</strong> A robust free-form journaling module with rich tagging capabilities for categories, people, and recurring themes.</li><li><strong>AI Co-pilot for Insight & Therapy:</strong> Leverages the Google Gemini API for a suite of intelligent features, including contextual analysis, streaming therapy chat, and an AI writing assistant.</li><li><strong>Structured Therapy Journals:</strong> Implements digital versions of established therapeutic techniques like CBT Thought Records, Gratitude Journals, and Expressive Writing.</li><li><strong>"Self-Discovery" Module:</strong> A guided, multi-stage journey for deep self-reflection covering past, present, and future.</li><li><strong>Integrated Clinical Programs:</strong> Features digitized, interactive versions of renowned, evidence-based therapy programs for conditions like Insomnia (CBT-I) and Social Anxiety (CBT).</li><li><strong>Text-to-Speech (TTS) Integration:</strong> Utilizes Azure Cognitive Services for high-quality, natural-sounding voice output.</li></ul>`, 
                 tech: 'Python, Flask, Google Gemini, Azure TTS, JavaScript, Chart.js', 
-				youtube: 'https://youtu.be/iAn-Ixlmge8',                
+				youtube: 'https://youtu.be/iAn-Ixlmge8',
+                case_study_url: '#project-psych-cleaner',
 				categories: ['flagship', 'featured', 'ai', 'web'] 
             },
             { 
@@ -782,8 +1051,19 @@
                 short_desc: 'A sophisticated, AI-driven web application designed to streamline the entire academic research, writing, and learning lifecycle.', 
                 long_desc: `<p>Spearheaded the design and full-stack development of this project, transforming an initial desktop concept into a sophisticated, AI-driven web application designed to streamline the entire academic research, writing, and learning lifecycle.</p><strong>Key Contributions & Features:</strong><ul><li><strong>Full-Stack Web Architecture:</strong> Developed a robust backend using Flask and SQLAlchemy, featuring a RESTful API that serves both a dynamic, single-page web application and a companion Chrome extension.</li><li><strong>Advanced AI-Powered Writing Assistant:</strong> Engineered a multi-panel "Writing Assistant" module that actively guides the user's writing process with a rich-text editor, contextual source management, and conversational AI chat.</li><li><strong>Personalized "Learn Anything" Module:</strong> Implemented an innovative "Learn Anything" module where users can create persistent "Learning Libraries" and engage in contextual, stateful conversations with an AI tutor.</li><li><strong>Automated Content Generation & Study Tools:</strong> Automated the creation of complex study materials, including multi-day study plans, varied exam types, and themed PowerPoint presentations.</li></ul>`, 
                 tech: 'Python, Flask, SQLAlchemy, JavaScript, Bootstrap, Google Gemini, Chrome Extensions', 
-                youtube: 'https://www.youtube.com/watch?v=LR0EVrcY-_k', 
+                youtube: 'https://www.youtube.com/watch?v=LR0EVrcY-_k',
+                case_study_url: '#project-summarizer-3000',
                 categories: ['flagship', 'featured', 'ai', 'web'] 
+            },
+            { 
+                id: 'flawless-pdf-annotator', 
+                title: 'Flawless PDF Annotator: AI-Enhanced Research Tool', 
+                image: 'images/flawless-pdf-annotator.png', 
+                short_desc: 'A powerful desktop PDF reader built with PyQt6, featuring an AI assistant, advanced annotation tools, and a multi-pane interface for streamlined research.', 
+                long_desc: `<p>A sophisticated, feature-rich PDF reader and research environment developed from scratch using Python and PyQt6. This desktop application is designed for academic and professional use, integrating powerful annotation capabilities with a context-aware AI assistant to create a seamless workflow.</p><strong>Key Features & Architecture:</strong><ul><li><strong>High-Performance PDF Rendering:</strong> Utilizes the PyMuPDF (Fitz) library for fast and accurate page rendering, with performance optimizations like lazy loading and render caching.</li><li><strong>Three-Pane Interface:</strong> A highly organized layout featuring a sidebar for navigation (file history, annotations, AI notes), a central PDF viewer, and a dedicated AI assistant panel.</li><li><strong>Advanced Annotation Suite:</strong> Supports precise, character-based text selection, multi-color highlighting, and persistent text notes. All annotations are saved directly and non-destructively to the PDF file.</li><li><strong>Integrated AI Assistant (Gemini):</strong> A powerful AI panel provides contextual chat about the document content, along with customizable "Smart Actions" to summarize, analyze, or query selected text, pages, or the entire document.</li><li><strong>Persistent AI Notes:</strong> AI-generated insights can be saved as structured notes within the PDF's metadata, creating a permanent, searchable knowledge base tied to the source document.</li><li><strong>Modern User Experience:</strong> Features include a floating toolbar for quick access to controls, smooth middle-mouse-button auto-scrolling, and a robust settings panel for API and prompt customization.</li></ul>`, 
+                tech: 'Python, PyQt6, PyMuPDF (Fitz), Google Gemini, QThread, JSON',
+                case_study_url: '#project-flawless-pdf-annotator',
+                categories: ['flagship', 'featured', 'ai', 'desktop'] 
             },
             { 
                 id: 'context-aware-assistant', 
@@ -866,8 +1146,6 @@
             { id: 'lexigraph-extractor', title: 'LexiGraph_Extractor.py - Word Document Image Extractor', image: 'images/lexigraph-extractor.png', short_desc: 'A Python script to extract and intelligently name images from .docx files based on preceding numbered list items.', long_desc: `<p>LexiGraph_Extractor.py is a Python script designed to extract images from Microsoft Word documents (.docx files). It specifically targets images that appear directly beneath numbered list items. The text of the numbered list item is used as the base filename for the extracted image, which is then saved in PNG format.</p><p>This script is useful for automating the process of saving images from documents where images are systematically captioned or described by preceding numbered list entries.</p><strong>Features:</strong><ul><li><strong>Targeted Extraction:</strong> Focuses on images associated with numbered list items.</li><li><strong>Automatic Naming:</strong> Uses the text of the numbered list item (e.g., "1. My Image Description") to name the output file (e.g., "My Image Description.png").</li><li><strong>PNG Output:</strong> Saves all extracted images in the PNG format.</li></ul>`, tech: 'Python, python-docx, Pillow', github: 'https://github.com/Unreliable-Support/LexiGraph_Extractor.py', categories: ['extensions'] }
         ];
 
-        const flagshipGrid = document.getElementById("flagship-projects-grid");
-        const featuredGrid = document.getElementById("featured-projects-grid");
         const projectsGrid = document.getElementById("projectsGrid");
         
         const filterButtons = document.querySelectorAll(".filter-btn");
@@ -875,7 +1153,7 @@
         const modalClose = document.querySelector(".modal-close");
 
         // --- DEFINE PROJECT GROUPS AND ORDER ---
-        const flagshipIds = ['psych-cleaner', 'summarizer-3000'];
+        const flagshipIds = ['psych-cleaner', 'summarizer-3000', 'flawless-pdf-annotator'];
         const featuredIds = [
             'context-aware-assistant', 
             'habit-tracker', 
@@ -886,8 +1164,6 @@
 
         // --- RENDER PROJECTS ---
         const renderProjects = () => {
-            flagshipGrid.innerHTML = "";
-            featuredGrid.innerHTML = "";
             projectsGrid.innerHTML = "";
             
             const createCardHTML = (proj) => {
@@ -924,25 +1200,9 @@
                 return card;
             };
 
-            // 1. Populate "All Projects" grid with every project
+            // Populate "All Projects" grid with every project
             projects.forEach(project => {
                 projectsGrid.appendChild(createCardElement(project));
-            });
-
-            // 2. Populate "Flagship" grid using its specific ID list
-            flagshipIds.forEach(id => {
-                const project = projects.find(p => p.id === id);
-                if (project) {
-                    flagshipGrid.appendChild(createCardElement(project));
-                }
-            });
-
-            // 3. Populate "Featured" grid using its specific, separate ID list
-            featuredIds.forEach(id => {
-                const project = projects.find(p => p.id === id);
-                if (project) {
-                    featuredGrid.appendChild(createCardElement(project));
-                }
             });
         };
 
@@ -998,6 +1258,7 @@
             let links = '';
             if (project.github) links += `<a href="${project.github}" target="_blank" class="project-link github"><i class="fab fa-github"></i> GitHub</a>`;
             if (project.youtube) links += `<a href="${project.youtube}" target="_blank" class="project-link youtube"><i class="fab fa-youtube"></i> YouTube</a>`;
+            
             modalLinksContainer.innerHTML = links;
 
             modal.style.display = "flex";
@@ -1072,6 +1333,26 @@
         });
         
         activateNavLink();
+
+        // --- Proje Sekme Mantığı ---
+        const tabButtons = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+
+                const targetTab = button.dataset.tab;
+                tabContents.forEach(content => {
+                    if (content.id === targetTab) {
+                        content.classList.add('active');
+                    } else {
+                        content.classList.remove('active');
+                    }
+                });
+            });
+        });
 
         // --- INITIAL RENDER ---
         renderProjects();
