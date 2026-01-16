@@ -730,6 +730,7 @@
         <div id="flagship-content" class="tab-content active">
             
 
+
 <!-- Flagship Project 1: AI Copy Editor -->
             <div class="case-study-section" style="padding-top: 0; background: transparent;">
                 <div class="case-study-container">
@@ -762,6 +763,20 @@
                                     <div class="tech-tag">LocalStorage API</div>
                                 </div>
                             </div>
+                            <div class="project-links" style="margin-top: 2rem;">
+                                <!-- Video yerine Coming Soon yazısı -->
+                                <span class="project-link" style="background: var(--secondary-bg); color: var(--text-muted); cursor: default; border: 1px solid var(--border-color);">
+                                    <i class="fas fa-video-slash"></i> Video Coming Soon
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Video Yerine Resim Eklendi -->
+                    <div class="video-section">
+                        <h3>Interface Preview</h3>
+                        <div style="width: 100%; border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color); box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
+                            <img src="images/ai-copy-editor.png" alt="AI Copy Editor Interface" style="width: 100%; height: auto; display: block;">
                         </div>
                     </div>
                 </div>
@@ -1067,9 +1082,9 @@
         
         applyStoredTheme();
 
-        // --- PROJECT DATA ---
+// --- PROJECT DATA ---
         const projects = [
-            // --- NEW PROJECTS ---
+            // 1. Flagship
             {
                 id: 'ai-copy-editor',
                 title: 'AI Copy Editor & Cliche Hunter',
@@ -1077,47 +1092,10 @@
                 short_desc: 'An advanced AI tool for cleaning text cliches, enforcing styles, and smart redaction with side-by-side diffing.',
                 long_desc: `<p>A powerful, full-stack editorial tool built to streamline the text refinement process. It specifically targets "cliches" and "banned words" defined by the user, offering AI-generated alternatives that maintain the original context.</p><strong>Key Features:</strong><ul><li><strong>Multi-Mode AI Analysis:</strong> Specialized prompts for "Cliche Cleaning", "Redaction" (Grammar/Flow), and a custom "Ask Editor" persona mode.</li><li><strong>Interactive Diff View:</strong> A side-by-side comparison interface that highlights changes, allowing users to selectively accept or reject AI suggestions.</li><li><strong>File Processing:</strong> Directly handles <code>.txt</code> and <code>.pptx</code> files. It deconstructs PowerPoint slides, processes the text, and rebuilds the presentation.</li><li><strong>Global Comments:</strong> An integrated commenting system allowing users to annotate specific revisions.</li></ul>`,
                 tech: 'JavaScript, Bootstrap 5, Google Gemini API, JSZip, pptxgenjs, LocalStorage',
-                case_study_url: '#', // Points to the flagship section if clicked in all projects
+                case_study_url: '#', 
                 categories: ['flagship', 'featured', 'ai', 'web']
             },
-            {
-                id: 'flowtime-tracker',
-                title: 'FlowTime Habit Tracker',
-                image: 'images/flowtime-tracker.png',
-                short_desc: 'A robust desktop productivity tool featuring habit tracking, flow timers, and detailed visual analytics.',
-                long_desc: `<p>A comprehensive desktop application designed for productivity enthusiasts. It combines habit tracking with a "FlowTime" timer approach, allowing users to track deep work sessions and visualize their progress over time.</p><strong>Key Features:</strong><ul><li><strong>Persistent Database:</strong> Uses SQLite to store habit data, session logs, and daily goals securely.</li><li><strong>Visual Analytics:</strong> Integrated Matplotlib to generate interactive weekly bar charts and activity timelines.</li><li><strong>Mini-Mode Overlay:</strong> A compact, floating window version of the tracker that stays on top of other windows for unobtrusive monitoring.</li><li><strong>Drag & Drop Interface:</strong> Custom implementation for reordering habits within the UI.</li></ul>`,
-                tech: 'Python, Tkinter, SQLite, Matplotlib, tkcalendar',
-                categories: ['featured', 'desktop', 'ai'] // Included 'ai' as it supports productivity
-            },
-            {
-                id: 'ngram-analyzer',
-                title: 'N-Gram Analysis Bot',
-                image: 'images/ngram-analyzer.png',
-                short_desc: 'A linguistic analysis tool for extracting and visualizing recurring word patterns across various document formats.',
-                long_desc: `<p>A specialized desktop tool for linguistic analysis, designed to process large volumes of text and identify recurring patterns (N-Grams). It's particularly useful for SEO, content analysis, and academic research.</p><strong>Key Features:</strong><ul><li><strong>Multi-Format Support:</strong> drag-and-drop support for DOCX, PPTX, XLSX, and TXT files.</li><li><strong>Advanced NLP Processing:</strong> Incorporates NLTK for lemmatization (finding word roots) and stop-word filtering to ensure accurate analysis.</li><li><strong>Interactive Results:</strong> Displays 1-5 gram frequencies in sortable tables with context previews on click.</li><li><strong>Excel Export:</strong> Allows users to export comprehensive analysis data to Excel for further reporting.</li></ul>`,
-                tech: 'Python, Tkinter, Pandas, NLTK, OpenPyXL, python-docx',
-                categories: ['desktop', 'ai']
-            },
-            {
-                id: 'subtitle-pro',
-                title: 'Video Subtitle Pro Extension',
-                image: 'images/subtitle-pro.png',
-                short_desc: 'A Chrome extension that adds external subtitle support and translation tools to any HTML5 video player.',
-                long_desc: `<p>A feature-packed Chrome extension that enhances the video streaming experience by allowing users to add external subtitles to any video element on the web. It integrates directly with the DOM to overlay customizable subtitles.</p><strong>Key Features:</strong><ul><li><strong>Universal Drag & Drop:</strong> Users can drag SRT or ZIP files directly onto a video player to load subtitles instantly.</li><li><strong>OpenSubtitles Integration:</strong> Built-in search and download capability connecting directly to the OpenSubtitles API.</li><li><strong>Smart Sync:</strong> Tools to adjust subtitle synchronization on the fly.</li><li><strong>Vocabulary Builder:</strong> Click-to-translate feature that saves words to a personal vocabulary list for language learners.</li></ul>`,
-                tech: 'JavaScript, Chrome Extension API, OpenSubtitles API, Web APIs',
-                categories: ['extensions', 'web']
-            },
-            {
-                id: 'volume-master',
-                title: 'Volume Master Booster',
-                image: 'images/volume-master.png',
-                short_desc: 'A browser extension to boost audio volume up to 600% using the Web Audio API, persisting across tabs.',
-                long_desc: `<p>A utility extension that breaks the 100% volume limit on web browsers. It captures the audio stream of the active tab and processes it through the Web Audio API to apply gain without distorting the system volume.</p><strong>Key Features:</strong><ul><li><strong>600% Volume Boost:</strong> Uses AudioContext and GainNode to amplify sound significantly.</li><li><strong>Tab-Specific Control:</strong> Manages volume levels independently for each tab.</li><li><strong>Persistence:</strong> Maintains volume settings even when navigating within the same tab/frame.</li></ul>`,
-                tech: 'JavaScript, Web Audio API, Chrome Scripting API',
-                categories: ['extensions']
-            },
-
-            // --- EXISTING PROJECTS ---
+            // 2. Flagship
             { 
                 id: 'psych-cleaner', 
                 title: 'Psych Cleaner: AI-Powered Journaling & Therapy Platform', 
@@ -1129,6 +1107,7 @@
                 case_study_url: '#project-psych-cleaner',
 				categories: ['flagship', 'featured', 'ai', 'web'] 
             },
+            // 3. Flagship
             { 
                 id: 'summarizer-3000', 
                 title: 'Summarizer 3000: AI Research & Learning Environment', 
@@ -1140,6 +1119,7 @@
                 case_study_url: '#project-summarizer-3000',
                 categories: ['flagship', 'featured', 'ai', 'web'] 
             },
+            // 4. Flagship (Desktop #1)
             { 
                 id: 'flawless-pdf-annotator', 
                 title: 'Flawless PDF Annotator: AI-Enhanced Research Tool', 
@@ -1151,7 +1131,28 @@
                 case_study_url: '#project-flawless-pdf-annotator',
                 categories: ['flagship', 'featured', 'ai', 'desktop'] 
             },
+            // 5. Featured (Desktop #2)
             { 
+                id: 'summarizer-3000-desktop', 
+                title: 'Summarizer 3000 (Desktop Version)', 
+                image: 'images/summarizer-3000-desktop.png', 
+                short_desc: 'The original desktop prototype for the Summarizer 3000 ecosystem, providing foundational logic for the full-stack web platform.', 
+                long_desc: `<p>The original desktop prototype for the Summarizer 3000 ecosystem. This powerful Tkinter application provided the foundational logic for content ingestion (PDF, DOCX), AI-powered summarization, and hierarchical project management, which was later evolved into the full-stack web platform.</p><ul><li>Developed a multi-tabbed GUI for managing different research projects and their associated source files.</li><li>Integrated the Gemini API for core text analysis and summarization tasks.</li><li>Established the database schema and interaction logic that served as a blueprint for the web version's backend.</li></ul>`, 
+                tech: 'Python, Tkinter, Google Gemini, PyPDF2, python-docx', 
+                categories: ['featured', 'desktop', 'ai'] 
+            },
+            // 6. Featured
+            {
+                id: 'subtitle-pro',
+                title: 'Video Subtitle Pro Extension',
+                image: 'images/subtitle-pro.png',
+                short_desc: 'A Chrome extension that adds external subtitle support and translation tools to any HTML5 video player.',
+                long_desc: `<p>A feature-packed Chrome extension that enhances the video streaming experience by allowing users to add external subtitles to any video element on the web. It integrates directly with the DOM to overlay customizable subtitles.</p><strong>Key Features:</strong><ul><li><strong>Universal Drag & Drop:</strong> Users can drag SRT or ZIP files directly onto a video player to load subtitles instantly.</li><li><strong>OpenSubtitles Integration:</strong> Built-in search and download capability connecting directly to the OpenSubtitles API.</li><li><strong>Smart Sync:</strong> Tools to adjust subtitle synchronization on the fly.</li><li><strong>Vocabulary Builder:</strong> Click-to-translate feature that saves words to a personal vocabulary list for language learners.</li></ul>`,
+                tech: 'JavaScript, Chrome Extension API, OpenSubtitles API, Web APIs',
+                categories: ['extensions', 'web', 'featured']
+            },
+            // 7. Featured (Desktop)
+             { 
                 id: 'context-aware-assistant', 
                 title: 'Context-Aware AI Assistant (Desktop)', 
                 image: 'images/context-aware-assistant.png', 
@@ -1160,6 +1161,7 @@
                 tech: 'Python, Tkinter, Global Hotkeys, PyAutoGUI, PyMuPDF, Pandoc, Gemini API', 
                 categories: ['featured', 'ai', 'desktop'] 
             },
+            // 8. Featured (Web)
             { 
                 id: 'habit-tracker', 
                 title: 'Personal Gamified Dashboard (Habit Tracker)', 
@@ -1169,6 +1171,7 @@
                 tech: 'Python, Flask, JavaScript, Chart.js, HTML, CSS', 
                 categories: ['featured', 'web'] 
             },
+            // 9. Featured (Desktop)
             { 
                 id: 'content-workflow-automator', 
                 title: 'AI-Powered Content Workflow Automator', 
@@ -1179,6 +1182,7 @@
                 youtube: 'https://www.youtube.com/watch?v=sCXsc7B2PcY', 
                 categories: ['featured', 'ai', 'desktop'] 
             },
+             // 10. Featured (Desktop)
             { 
                 id: 'note-harvester', 
                 title: 'Note Harvester: Desktop Utility', 
@@ -1190,6 +1194,34 @@
                 youtube: 'https://youtu.be/z5KpwDU25sY', 
                 categories: ['featured', 'desktop'] 
             },
+            // Non-Featured Items start here
+            {
+                id: 'flowtime-tracker',
+                title: 'FlowTime Habit Tracker',
+                image: 'images/flowtime-tracker.png',
+                short_desc: 'A robust desktop productivity tool featuring habit tracking, flow timers, and detailed visual analytics.',
+                long_desc: `<p>A comprehensive desktop application designed for productivity enthusiasts. It combines habit tracking with a "FlowTime" timer approach, allowing users to track deep work sessions and visualize their progress over time.</p><strong>Key Features:</strong><ul><li><strong>Persistent Database:</strong> Uses SQLite to store habit data, session logs, and daily goals securely.</li><li><strong>Visual Analytics:</strong> Integrated Matplotlib to generate interactive weekly bar charts and activity timelines.</li><li><strong>Mini-Mode Overlay:</strong> A compact, floating window version of the tracker that stays on top of other windows for unobtrusive monitoring.</li><li><strong>Drag & Drop Interface:</strong> Custom implementation for reordering habits within the UI.</li></ul>`,
+                tech: 'Python, Tkinter, SQLite, Matplotlib, tkcalendar',
+                categories: ['desktop'] // Removed 'featured'
+            },
+            {
+                id: 'ngram-analyzer',
+                title: 'N-Gram Analysis Bot',
+                image: 'images/ngram-analyzer.png',
+                short_desc: 'A linguistic analysis tool for extracting and visualizing recurring word patterns across various document formats.',
+                long_desc: `<p>A specialized desktop tool for linguistic analysis, designed to process large volumes of text and identify recurring patterns (N-Grams). It's particularly useful for SEO, content analysis, and academic research.</p><strong>Key Features:</strong><ul><li><strong>Multi-Format Support:</strong> drag-and-drop support for DOCX, PPTX, XLSX, and TXT files.</li><li><strong>Advanced NLP Processing:</strong> Incorporates NLTK for lemmatization (finding word roots) and stop-word filtering to ensure accurate analysis.</li><li><strong>Interactive Results:</strong> Displays 1-5 gram frequencies in sortable tables with context previews on click.</li><li><strong>Excel Export:</strong> Allows users to export comprehensive analysis data to Excel for further reporting.</li></ul>`,
+                tech: 'Python, Tkinter, Pandas, NLTK, OpenPyXL, python-docx',
+                categories: ['desktop', 'ai'] // Removed 'featured'
+            },
+            {
+                id: 'volume-master',
+                title: 'Volume Master Booster',
+                image: 'images/volume-master.png',
+                short_desc: 'A browser extension to boost audio volume up to 600% using the Web Audio API, persisting across tabs.',
+                long_desc: `<p>A utility extension that breaks the 100% volume limit on web browsers. It captures the audio stream of the active tab and processes it through the Web Audio API to apply gain without distorting the system volume.</p><strong>Key Features:</strong><ul><li><strong>600% Volume Boost:</strong> Uses AudioContext and GainNode to amplify sound significantly.</li><li><strong>Tab-Specific Control:</strong> Manages volume levels independently for each tab.</li><li><strong>Persistence:</strong> Maintains volume settings even when navigating within the same tab/frame.</li></ul>`,
+                tech: 'JavaScript, Web Audio API, Chrome Scripting API',
+                categories: ['extensions'] // Removed 'featured'
+            },
             { 
                 id: 'gemini-desktop-ocr', 
                 title: 'Gemini-Powered Desktop OCR', 
@@ -1197,7 +1229,7 @@
                 short_desc: 'A high-performance desktop app that converts scanned PDFs into structured documents using the Gemini Vision API and parallel processing.', 
                 long_desc: `<ul><li>Developed a robust desktop application with a Tkinter GUI to convert entire scanned PDF documents into high-quality, editable formats (PDF, MD, TXT).</li><li>Leverages the Google Gemini Vision API for superior text extraction, outperforming traditional OCR engines.</li><li>Implements a multi-threaded, queue-based processing pipeline using <strong>concurrent.futures</strong> to handle pages in parallel, maximizing throughput by utilizing multiple API keys simultaneously.</li><li>Features an intelligent retry and model-fallback mechanism to ensure maximum completion rates.</li><li>Integrates <strong>Pandoc</strong> with a custom XeLaTeX template for advanced output styling.</li></ul>`, 
                 tech: 'Python, Tkinter, Gemini API, Pandoc, Concurrent Futures', 
-                categories: ['featured', 'ai', 'desktop'] 
+                categories: ['ai', 'desktop'] 
             },
             { 
                 id: 'ai-pdf-outliner', 
@@ -1218,7 +1250,6 @@
                 categories: ['web'] 
             },
             { id: 'intelligent-pdf-converter', title: 'Intelligent PDF Converter (OCR + Pandoc)', image: 'images/intelligent-pdf-converter.png', short_desc: 'Converts scanned PDFs into reformatted, text-searchable documents using Tesseract OCR, multi-processing, and Pandoc.', long_desc: `<ul><li>Engineered a desktop application with a CustomTkinter GUI that converts scanned PDFs into reformatted, text-searchable PDF documents.</li><li>Employs Tesseract OCR via PyMuPDF to accurately extract text from image-based PDF pages, using multi-processing for parallel execution and enhanced performance.</li><li>Applies regex-based heuristic algorithms to identify and format headings, chapters, and paragraphs to create a structured Markdown output.</li><li>Uses the Pandoc engine to convert the generated Markdown into a clean, professionally formatted PDF with user-configurable options.</li></ul>`, tech: 'Python, CustomTkinter, Tesseract, PyMuPDF, Pandoc, Regex', github: 'https://github.com/Unreliable-Support/ocr-pdf-converter', categories: ['ai', 'desktop'] },
-            { id: 'summarizer-3000-desktop', title: 'Summarizer 3000 (Desktop Version)', image: 'images/summarizer-3000-desktop.png', short_desc: 'The original desktop prototype for the Summarizer 3000 ecosystem, providing foundational logic for the full-stack web platform.', long_desc: `<p>The original desktop prototype for the Summarizer 3000 ecosystem. This powerful Tkinter application provided the foundational logic for content ingestion (PDF, DOCX), AI-powered summarization, and hierarchical project management, which was later evolved into the full-stack web platform.</p><ul><li>Developed a multi-tabbed GUI for managing different research projects and their associated source files.</li><li>Integrated the Gemini API for core text analysis and summarization tasks.</li><li>Established the database schema and interaction logic that served as a blueprint for the web version's backend.</li></ul>`, tech: 'Python, Tkinter, Google Gemini, PyPDF2, python-docx', categories: ['featured', 'desktop', 'ai'] },
             { id: 'list-liberator', title: 'List-Liberator: Gmail Unsubscribe Dashboard', image: 'images/list-liberator.png', short_desc: 'A command-line utility that scans Gmail via API and generates an HTML dashboard with one-click unsubscribe links.', long_desc: `<p>A command-line utility that automates the tedious process of unsubscribing from mailing lists. It scans a user's Gmail account via the official API, identifies all unique subscriptions, and generates a single, clean HTML dashboard with one-click unsubscribe links.</p><ul><li>Securely authenticates with Google using OAuth 2.0, ensuring user privacy with read-only access and local token storage.</li><li>Efficiently processes thousands of emails by using batch API requests to minimize API calls and avoid rate-limiting errors.</li><li>Generates a simple, portable HTML dashboard that works offline and provides a centralized place to manage all subscriptions.</li></ul>`, tech: 'Python, Google API Client, OAuth2, HTML/CSS', github: 'https://github.com/Unreliable-Support/List-Liberator.py', categories: ['ai', 'extensions'] },
             { id: 'jigsaw-web-builder', title: 'Jigsaw Web Builder: Drag & Drop Page Creator', image: 'images/jigsaw-web-builder.png', short_desc: 'A lightweight, zero-dependency, in-browser tool for visually creating simple web pages, contained within a single HTML file.', long_desc: `<p>A lightweight, zero-dependency, in-browser tool for visually creating simple web pages. The entire application is contained within a single HTML file, making it incredibly portable and easy to use with no setup required.</p><ul><li><strong>Zero Dependencies:</strong> Built entirely with vanilla JavaScript, HTML5, and CSS3. No libraries, no frameworks, no build steps.</li><li><strong>Visual Page Building:</strong> Features a drag-and-drop interface to add and reorder components like headings, images, multi-column layouts, and embedded videos.</li><li><strong>Real-Time Inspector Panel:</strong> Select any element on the canvas to instantly edit its properties (color, font size, URL, margins) with live updates.</li><li><strong>Clean Code Generation:</strong> Generates a clean, self-contained HTML file with embedded CSS that can be downloaded with a single click.</li></ul>`, tech: 'JavaScript (Vanilla), HTML5, CSS3', github: 'https://github.com/Unreliable-Support/Jigsaw-Web-Builder', categories: ['web'] },
             { id: 'ffmpeg-video-automation', title: 'Python FFMPEG Video Automation', image: 'images/ffmpeg-video-automation.png', short_desc: 'A Python script to automate the creation of short-form videos by programmatically controlling the FFMPEG command-line tool.', long_desc: `<ul><li>Wrote a Python script to automate the creation of short-form videos by programmatically controlling the FFMPEG command-line tool.</li><li>The script reads quotes and authors from a CSV file, dynamically creating text overlays with advanced formatting, and combines them with background images and audio to produce unique video outputs.</li></ul>`, tech: 'Python, FFMPEG (subprocess), textwrap', github: 'https://github.com/Unreliable-Support/python-ffmpeg-video-automation', youtube: 'https://www.youtube.com/watch?v=ryzhvRr-Pi0', categories: ['ai', 'extensions'] },
@@ -1257,21 +1288,18 @@
         const modalClose = document.querySelector(".modal-close");
 
         // --- DEFINE PROJECT GROUPS AND ORDER ---
-        // UPDATED: Added 'ai-copy-editor' to flagship
         const flagshipIds = ['ai-copy-editor', 'psych-cleaner', 'summarizer-3000', 'flawless-pdf-annotator'];
         
-        // UPDATED: Added new projects to featured
+        // Updated featuredIds to match user request (removed flowtime, ngram, volume master)
         const featuredIds = [
-            'flowtime-tracker',
-            'ngram-analyzer',
+            'summarizer-3000-desktop',
             'subtitle-pro',
-            'volume-master',
             'context-aware-assistant', 
             'habit-tracker', 
             'content-workflow-automator', 
-            'note-harvester', 
-            'summarizer-3000-desktop'
+            'note-harvester'
         ];
+
 
         // --- RENDER PROJECTS ---
         const renderProjects = () => {
